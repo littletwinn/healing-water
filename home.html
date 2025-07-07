@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>น้ำเสีย</title>
-  <link rel="stylesheet" href="main.css">
+  
   <style>
     body {
       margin: 0;
       font-family: 'Leelawadee UI';
-      background-color: #7C444F;
-      
+      background-color: #AFDDFF;
     }
 
     .navbar {
@@ -23,7 +22,7 @@
       color: black;
       padding: 14px 20px;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
@@ -54,10 +53,21 @@
   </div>
 
   <!-- ✅ เนื้อหาหลัก -->
-  <div class="content">
-    <h1 style="color: white;">WELCOME!</h1>
-    <h3 style="color: white;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h3>
-  </div>
+<div class="content">
+  <h1 style="color: white;">WELCOME!</h1>
+  <h3 style="color: white;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h3>
+  <p id="scoreDisplay" style="color:red; font-size: 20px;"></p>
+</div>
+
+<!-- ✅ เพิ่ม script -->
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const score = urlParams.get('score');
+  if (score !== null) {
+    document.getElementById("scoreDisplay").textContent = `คุณได้คะแนน ${score} จาก 8 ข้อปรนัย`;
+  }
+</script>
+
 
 
 

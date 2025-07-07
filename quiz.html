@@ -4,26 +4,23 @@
   <meta charset="UTF-8" />
   <title>WELCOME</title>
   <style>
-
-    .container {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    
     body {
       font-family: 'Leelawadee UI';
-      background-color: #FFF2EB
-      ;
+      background-color: #FFF2EB;
       padding: 40px;
       max-width: 800px;
       margin: auto;
     }
 
+    .container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
     h2 {
-      color: brown
-      ;
+      color: brown;
     }
 
     .question {
@@ -53,140 +50,122 @@
       font-size: 16px;
       cursor: pointer;
     }
-
-    #result {
-      margin-top: 30px;
-      font-weight: bold;
-      font-size: 18px;
-      color: #E14434;
-    }
   </style>
 </head>
 <body>
-    
 
-  <h2>แบบทดสอบเรื่อง “น้ำเสียและการบำบัดน้ำเสีย”</h2>
-  
+  <div class="container">
+    <h2>แบบทดสอบเรื่อง “น้ำเสียและการบำบัดน้ำเสีย”</h2>
 
-  <form id="quizForm">
-    <!-- ข้อ 1 -->
-    <div class="question">
-      <p>1. ข้อใดคือความหมายของน้ำเสีย?</p>
-      <label><input type="radio" name="q1" value="A"> A. น้ำฝนที่ตกลงมา</label><br>
-      <label><input type="radio" name="q1" value="B"> B. น้ำที่มีสิ่งปนเปื้อนจนไม่สามารถใช้งานได้</label><br>
-      <label><input type="radio" name="q1" value="C"> C. น้ำจากแม่น้ำ</label><br>
-      <label><input type="radio" name="q1" value="D"> D. น้ำแร่ธรรมชาติ</label>
-    </div>
+    <form id="quizForm">
+      <!-- คำถามปรนัย -->
+      <!-- (เหมือนเดิมทั้งหมด 8 ข้อ) -->
+      <div class="question">
+        <p>1. ข้อใดคือความหมายของน้ำเสีย?</p>
+        <label><input type="radio" name="q1" value="A"> A. น้ำฝนที่ตกลงมา</label><br>
+        <label><input type="radio" name="q1" value="B"> B. น้ำที่มีสิ่งปนเปื้อนจนไม่สามารถใช้งานได้</label><br>
+        <label><input type="radio" name="q1" value="C"> C. น้ำจากแม่น้ำ</label><br>
+        <label><input type="radio" name="q1" value="D"> D. น้ำแร่ธรรมชาติ</label>
+      </div>
 
-    <!-- ข้อ 2 -->
-    <div class="question">
-      <p>2. ข้อใดไม่ใช่แหล่งกำเนิดของน้ำเสีย?</p>
-      <label><input type="radio" name="q2" value="A"> A. โรงงานอุตสาหกรรม</label><br>
-      <label><input type="radio" name="q2" value="B"> B. ฟาร์มเลี้ยงสัตว์</label><br>
-      <label><input type="radio" name="q2" value="C"> C. ป่าไม้ธรรมชาติ</label><br>
-      <label><input type="radio" name="q2" value="D"> D. บ้านเรือน</label>
-    </div>
+      <div class="question">
+        <p>2. ข้อใดไม่ใช่แหล่งกำเนิดของน้ำเสีย?</p>
+        <label><input type="radio" name="q2" value="A"> A. โรงงานอุตสาหกรรม</label><br>
+        <label><input type="radio" name="q2" value="B"> B. ฟาร์มเลี้ยงสัตว์</label><br>
+        <label><input type="radio" name="q2" value="C"> C. ป่าไม้ธรรมชาติ</label><br>
+        <label><input type="radio" name="q2" value="D"> D. บ้านเรือน</label>
+      </div>
 
-    <!-- ข้อ 3 -->
-    <div class="question">
-      <p>3. น้ำเสียจากการล้างจาน อาบน้ำ หรือซักผ้า เรียกว่าอะไร?</p>
-      <label><input type="radio" name="q3" value="A"> A. น้ำเสียอุตสาหกรรม</label><br>
-      <label><input type="radio" name="q3" value="B"> B. น้ำเสียจากครัวเรือน</label><br>
-      <label><input type="radio" name="q3" value="C"> C. น้ำเสียเคมี</label><br>
-      <label><input type="radio" name="q3" value="D"> D. น้ำฝน</label>
-    </div>
+      <div class="question">
+        <p>3. น้ำเสียจากการล้างจาน อาบน้ำ หรือซักผ้า เรียกว่าอะไร?</p>
+        <label><input type="radio" name="q3" value="A"> A. น้ำเสียอุตสาหกรรม</label><br>
+        <label><input type="radio" name="q3" value="B"> B. น้ำเสียจากครัวเรือน</label><br>
+        <label><input type="radio" name="q3" value="C"> C. น้ำเสียเคมี</label><br>
+        <label><input type="radio" name="q3" value="D"> D. น้ำฝน</label>
+      </div>
 
-    <!-- ข้อ 4 -->
-    <div class="question">
-      <p>4. สารใดที่มักพบในน้ำเสียจากบ้านเรือน?</p>
-      <label><input type="radio" name="q4" value="A"> A. แบคทีเรีย</label><br>
-      <label><input type="radio" name="q4" value="B"> B. โลหะหนัก</label><br>
-      <label><input type="radio" name="q4" value="C"> C. ปุ๋ยเคมี</label><br>
-      <label><input type="radio" name="q4" value="D"> D. น้ำมันดิบ</label>
-    </div>
+      <div class="question">
+        <p>4. สารใดที่มักพบในน้ำเสียจากบ้านเรือน?</p>
+        <label><input type="radio" name="q4" value="A"> A. แบคทีเรีย</label><br>
+        <label><input type="radio" name="q4" value="B"> B. โลหะหนัก</label><br>
+        <label><input type="radio" name="q4" value="C"> C. ปุ๋ยเคมี</label><br>
+        <label><input type="radio" name="q4" value="D"> D. น้ำมันดิบ</label>
+      </div>
 
-    <!-- ข้อ 5 -->
-    <div class="question">
-      <p>5. การบำบัดน้ำเสียมีความสำคัญอย่างไร?</p>
-      <label><input type="radio" name="q5" value="A"> A. เพื่อเพิ่มจำนวนปลาน้ำจืด</label><br>
-      <label><input type="radio" name="q5" value="B"> B. เพื่อควบคุมระดับน้ำในแม่น้ำ</label><br>
-      <label><input type="radio" name="q5" value="C"> C. เพื่อลดมลพิษก่อนปล่อยลงแหล่งน้ำ</label><br>
-      <label><input type="radio" name="q5" value="D"> D. เพื่อผลิตไฟฟ้า</label>
-    </div>
+      <div class="question">
+        <p>5. การบำบัดน้ำเสียมีความสำคัญอย่างไร?</p>
+        <label><input type="radio" name="q5" value="A"> A. เพื่อเพิ่มจำนวนปลาน้ำจืด</label><br>
+        <label><input type="radio" name="q5" value="B"> B. เพื่อควบคุมระดับน้ำในแม่น้ำ</label><br>
+        <label><input type="radio" name="q5" value="C"> C. เพื่อลดมลพิษก่อนปล่อยลงแหล่งน้ำ</label><br>
+        <label><input type="radio" name="q5" value="D"> D. เพื่อผลิตไฟฟ้า</label>
+      </div>
 
-    <!-- ข้อ 6 -->
-    <div class="question">
-      <p>6. กระบวนการใดต่อไปนี้ใช้ในการบำบัดน้ำเสีย?</p>
-      <label><input type="radio" name="q6" value="A"> A. การระเหย</label><br>
-      <label><input type="radio" name="q6" value="B"> B. การตากแดด</label><br>
-      <label><input type="radio" name="q6" value="C"> C. การเติมอากาศ (Aeration)</label><br>
-      <label><input type="radio" name="q6" value="D"> D. การกรองด้วยทรายเพียงอย่างเดียว</label>
-    </div>
+      <div class="question">
+        <p>6. กระบวนการใดต่อไปนี้ใช้ในการบำบัดน้ำเสีย?</p>
+        <label><input type="radio" name="q6" value="A"> A. การระเหย</label><br>
+        <label><input type="radio" name="q6" value="B"> B. การตากแดด</label><br>
+        <label><input type="radio" name="q6" value="C"> C. การเติมอากาศ (Aeration)</label><br>
+        <label><input type="radio" name="q6" value="D"> D. การกรองด้วยทรายเพียงอย่างเดียว</label>
+      </div>
 
-    <!-- ข้อ 7 -->
-    <div class="question">
-      <p>7. ผลกระทบของการปล่อยน้ำเสียโดยไม่บำบัดคือข้อใด?</p>
-      <label><input type="radio" name="q7" value="A"> A. แหล่งน้ำสะอาดขึ้น</label><br>
-      <label><input type="radio" name="q7" value="B"> B. การเพิ่มความหลากหลายทางชีวภาพ</label><br>
-      <label><input type="radio" name="q7" value="C"> C. การเน่าเหม็นของน้ำและตายของสิ่งมีชีวิต</label><br>
-      <label><input type="radio" name="q7" value="D"> D. เพิ่มน้ำใช้ให้ชุมชน</label>
-    </div>
+      <div class="question">
+        <p>7. ผลกระทบของการปล่อยน้ำเสียโดยไม่บำบัดคือข้อใด?</p>
+        <label><input type="radio" name="q7" value="A"> A. แหล่งน้ำสะอาดขึ้น</label><br>
+        <label><input type="radio" name="q7" value="B"> B. การเพิ่มความหลากหลายทางชีวภาพ</label><br>
+        <label><input type="radio" name="q7" value="C"> C. การเน่าเหม็นของน้ำและตายของสิ่งมีชีวิต</label><br>
+        <label><input type="radio" name="q7" value="D"> D. เพิ่มน้ำใช้ให้ชุมชน</label>
+      </div>
 
-    <!-- ข้อ 8 -->
-    <div class="question">
-      <p>8. ข้อใดเป็นหน่วยงานที่มีหน้าที่ดูแลและควบคุมการบำบัดน้ำเสียในประเทศไทย?</p>
-      <label><input type="radio" name="q8" value="A"> A. กระทรวงพาณิชย์</label><br>
-      <label><input type="radio" name="q8" value="B"> B. กรมควบคุมมลพิษ</label><br>
-      <label><input type="radio" name="q8" value="C"> C. กระทรวงวัฒนธรรม</label><br>
-      <label><input type="radio" name="q8" value="D"> D. สำนักงานสถิติแห่งชาติ</label>
-    </div>
+      <div class="question">
+        <p>8. ข้อใดเป็นหน่วยงานที่มีหน้าที่ดูแลและควบคุมการบำบัดน้ำเสียในประเทศไทย?</p>
+        <label><input type="radio" name="q8" value="A"> A. กระทรวงพาณิชย์</label><br>
+        <label><input type="radio" name="q8" value="B"> B. กรมควบคุมมลพิษ</label><br>
+        <label><input type="radio" name="q8" value="C"> C. กระทรวงวัฒนธรรม</label><br>
+        <label><input type="radio" name="q8" value="D"> D. สำนักงานสถิติแห่งชาติ</label>
+      </div>
 
-    <!-- ข้อ 9 อัตนัย -->
-    <div class="question">
-      <p>9. ยกตัวอย่างแหล่งกำเนิดน้ำเสียที่คุณพบเห็นในชีวิตประจำวัน พร้อมอธิบายว่าเกิดจากกิจกรรมอะไร</p>
-      <textarea name="q9"></textarea>
-    </div>
+      <!-- คำถามอัตนัย -->
+      <div class="question">
+        <p>9. ยกตัวอย่างแหล่งกำเนิดน้ำเสียที่คุณพบเห็นในชีวิตประจำวัน</p>
+        <textarea name="q9"></textarea>
+      </div>
 
-    <!-- ข้อ 10 อัตนัย -->
-    <div class="question">
-      <p>10. คุณมีแนวทางหรือวิธีอย่างไรในการช่วยลดปริมาณน้ำเสียในบ้านหรือชุมชนของคุณ?</p>
-      <textarea name="q10"></textarea>
-    </div>
+      <div class="question">
+        <p>10. แนวทางในการช่วยลดปริมาณน้ำเสียของคุณ?</p>
+        <textarea name="q10"></textarea>
+      </div>
 
-    <button type="button" onclick="checkAnswers()">CHECK</button>
-    <a href="home.html">
-    <button type="button">Let's to learn more</button>
-  </a>
-  </form>
-
-  <div id="result"></div>
+      <button type="button" onclick="checkAnswers()">CHECK</button>
+    </form>
+  </div>
 
   <script>
-    function checkAnswers() {
-      const answers = {
-        q1: 'B',
-        q2: 'C',
-        q3: 'B',
-        q4: 'A',
-        q5: 'C',
-        q6: 'C',
-        q7: 'C',
-        q8: 'B'
-      };
+  function checkAnswers() {
+    const answers = {
+      q1: 'B', q2: 'C', q3: 'B', q4: 'A',
+      q5: 'C', q6: 'C', q7: 'C', q8: 'B'
+    };
 
-      let score = 0;
-      let total = Object.keys(answers).length;
-
-      for (let key in answers) {
-        const selected = document.querySelector(`input[name="${key}"]:checked`);
-        if (selected && selected.value === answers[key]) {
-          score++;
-        }
+    let score = 0;
+    for (let key in answers) {
+      const selected = document.querySelector(`input[name="${key}"]:checked`);
+      if (selected && selected.value === answers[key]) {
+        score++;
       }
-
-      document.getElementById("result").textContent = ` คุณได้คะแนน ${score} จาก ${total} ข้อปรนัย (ไม่รวมคำถามอัตนัย)`;
     }
-  </script>
+
+    const q9 = encodeURIComponent(document.querySelector('textarea[name="q9"]').value.trim());
+    const q10 = encodeURIComponent(document.querySelector('textarea[name="q10"]').value.trim());
+
+    // ส่งค่าไป home.html พร้อมส่งต่อไป idea.html ทีหลัง
+    window.location.href = `home.html?score=${score}&q9=${q9}&q10=${q10}`;
+  }
+</script>
+
+
+
+  
 
 </body>
 </html>
+

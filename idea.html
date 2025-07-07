@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>IDEA</title>
+  
   <style>
     body {
       margin: 0;
-      font-family: 'Leelawadee UI', sans-serif;
+      font-family: 'Leelawadee UI';
       background-color: #AFDDFF;
     }
 
@@ -21,7 +22,7 @@
       color: black;
       padding: 14px 20px;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
@@ -91,8 +92,8 @@
       font-size: 16px;
       line-height: 1.5;
       text-align: center;
+      white-space: pre-wrap;
     }
-
   </style>
 </head>
 <body>
@@ -106,9 +107,9 @@
     <a href="idea.html">IDEA BOX</a>
   </div>
 
-  <!-- กล่องไอเดีย 3 กล่อง -->
-  <div class="box-container">
-    <!-- กล่องที่ 1 -->
+  <!-- กล่องไอเดีย -->
+  <div class="box-container" id="boxContainer">
+    <!-- ตัวอย่างกล่องไอเดีย -->
     <div class="boxidea">
       <div class="img">
         <img src="white" alt="">
@@ -121,108 +122,45 @@
       </div>
     </div>
 
-    <!-- กล่องที่ 2 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-        <h1>𝗜𝗗𝗘𝗔 𝗧𝗜𝗧𝗟𝗘</h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
+    <!-- กล่องไอเดียอื่นๆ ใส่ตามต้องการ -->
+  </div>
 
-    <!-- กล่องที่ 3 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-        <h1>𝗜𝗗𝗘𝗔 𝗧𝗜𝗧𝗟𝗘</h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-  
+  <script>
+    // ดึงค่า query params จาก URL
+    const params = new URLSearchParams(window.location.search);
+    const score = params.get('score');
+    const q9 = params.get('q9');
+    const q10 = params.get('q10');
 
+    if (score !== null || q9 !== null || q10 !== null) {
+      const ideaQ9 = q9 ? decodeURIComponent(q9) : 'ไม่มีคำตอบ';
+      const ideaQ10 = q10 ? decodeURIComponent(q10) : 'ไม่มีคำตอบ';
 
-  <!-- กล่องที่ 4 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-        <h1>𝗜𝗗𝗘𝗔 𝗧𝗜𝗧𝗟𝗘</h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
+      // สร้างกล่องไอเดียใหม่จากคำตอบแบบทดสอบ
+      const newBox = document.createElement('div');
+      newBox.classList.add('boxidea');
 
-    <!-- กล่องที่ 5 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-        <h1>𝗜𝗗𝗘𝗔 𝗧𝗜𝗧𝗟𝗘</h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
+      newBox.innerHTML = `
+        <div class="img">
+          <img src="white" alt="">
+        </div>
+        <div class="content">
+          <h1>𝗜𝗗𝗘𝗔 จากแบบทดสอบ</h1>
+          <p>คะแนนปรนัย: ${score !== null ? score + ' / 8' : 'ไม่มีคะแนน'}</p>
+          <p>แหล่งกำเนิดน้ำเสียที่พบเห็น:<br>${ideaQ9}</p>
+          <p>แนวทางลดน้ำเสียของคุณ:<br>${ideaQ10}</p>
+        </div>
+      `;
 
-    <!-- กล่องที่ 6 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-        <h1>𝗜𝗗𝗘𝗔 𝗧𝗜𝗧𝗟𝗘</h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
+      document.getElementById('boxContainer').appendChild(newBox);
+    }
+  </script>
 
-    <!-- กล่องที่ 7 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-        <h1>𝗜𝗗𝗘𝗔 𝗧𝗜𝗧𝗟𝗘</h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-    <!-- กล่องที่ 8 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-        <h1>𝗜𝗗𝗘𝗔 𝗧𝗜𝗧𝗟𝗘</h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
- </div>
-     
-
- <!-- ติดต่อเรา -->
-<div style="background-color: #e0f7fa; color: black; text-align: center; padding: 10px 0; font-size: 16px; margin-top: 40px;">
-  ติดต่อเรา: โทร. 012-345-6789 | Email: example@email.com
-</div>
-
-
+  <!-- ติดต่อเรา -->
+  <div style="background-color: #e0f7fa; color: black; text-align: center; padding: 10px 0; font-size: 16px; margin-top: 40px;">
+    ติดต่อเรา: โทร. 012-345-6789 | Email: example@email.com
+  </div>
 
 </body>
 </html>
+
