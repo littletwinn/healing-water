@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>WELCOME</title>
+  <style>
+      body {
+    font-family: 'Leelawadee UI';
+    background-color: #FFF2EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center; 
+    
+    }
+
+     h2 {
+      color: #FFD66B;
+    }
+
+
+    .question h3 {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #FF9149;
+    }
+
+    textarea {
+      width: 100%;
+      height: 250px;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 35px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #FFD66B;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <h2>-⭒BRAINSTROME TIME!</h2>
+    
+    <!-- คำถามที่ -->
+    <div class="question">
+      <h3>คุณคิดว่าการปล่อยน้ำเสียลงแหล่งธรรมชาติส่งผลอะไรบ้าง?</h3>
+      <textarea name="q0"></textarea>
+    </div>
+
+    <!-- ปุ่มส่ง -->
+    <button type="button" onclick="goToHome()">SEND</button>
+
+  </div>
+
+  <script>
+    function goToHome() {
+      const q0 = encodeURIComponent(document.querySelector('textarea[name="q0"]').value.trim());
+      window.location.href = `home.html?q0=${q0}`;
+    }
+  </script>
+
+</body>
+</html>

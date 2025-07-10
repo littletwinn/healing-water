@@ -52,14 +52,39 @@
     <a href="idea.html">IDEA BOX</a>
   </div>
 
-  <!-- ✅ เนื้อหาหลัก -->
+  <!-- เนื้อหาหลัก -->
 <div class="content">
   <h1 style="color: white;">WELCOME!</h1>
   <h3 style="color: white;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h3>
   <p id="scoreDisplay" style="color:red; font-size: 20px;"></p>
 </div>
 
-<!-- ✅ เพิ่ม script -->
+
+<a href="quiz.html" class="button-link">POST-TEST</a>
+
+<style>
+  .button-link {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #FF9149;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  width: fit-content;
+}
+  
+
+  .button-link:hover {
+    background-color: #e4762f;
+  }
+</style>
+
+
+
+<!-- script -->
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const score = urlParams.get('score');
