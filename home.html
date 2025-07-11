@@ -36,14 +36,59 @@
       text-align: center;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      height: auto;
+      width: 70%;
+      text-align: center;
+      margin: 40px auto;
+    }
+
+    .button-link {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color:#7EACB5;
+      color: #fff7e4;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 20px;
+      text-align: center;
+      width: fit-content;
+    }
+
+    .button-link:hover {
+      background-color: #00809D;
+    }
+
+    .circle-button-big {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #FADFA1;
+      color: whitesmoke;
+      font-size: 36px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px auto;
+    }
+
+    .circle-button-big:hover {
+      background-color: #FFD66B;
     }
   </style>
 </head>
 <body>
 
-  <!-- ✅ แถบนำทางวางไว้ด้านบนสุด -->
+  <!-- แถบนำทาง -->
   <div class="navbar">
     <a href="home.html">HOME</a>
     <a href="cause.html">CAUSE</a>
@@ -53,54 +98,52 @@
   </div>
 
   <!-- เนื้อหาหลัก -->
-<div class="content">
-  <h1 style="color: white;">WELCOME!</h1>
-  <h3 style="color: white;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h3>
-  <p id="scoreDisplay" style="color:red; font-size: 20px;"></p>
-</div>
+  <div class="content">
+    <h1 style="color: white;">WELCOME!</h1>
+    <h2 style="color: white;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
+    <p id="scoreDisplay" style="color:red; font-size: 20px;"></p>
 
+    <!-- ปุ่มลูกศรลง -->
+    <button class="circle-button-big" onclick="scrollToSection()">&#x2193;</button>
+  </div>
 
-<a href="quiz.html" class="button-link">POST-TEST</a>
+  <!-- กล่องเนื้อหา -->
+  <div class="container">
+    <h2 style="color: #FF9149;">ลักษณะของน้ำเสีย</h2>
+    <p style="color: #FF9149;">
+      น้ำเสียประกอบด้วยของแข็งและสารเคมีหลากหลายชนิด 
+      โดยของแข็งในน้ำเสียมีทั้งที่ตกตะกอนได้ แขวนลอย และละลายน้ำ 
+      ซึ่งมักเป็นสารอินทรีย์ที่ย่อยสลายช้า ทำให้น้ำขุ่น เกิดตะกอน ตื้นเขิน 
+      และขาดออกซิเจนส่งผลต่อสิ่งมีชีวิตในน้ำ ด้านเคมี น้ำเสียมีสารอินทรีย์ 
+      เช่น คาร์โบไฮเดรต โปรตีน ไขมัน ที่จุลินทรีย์ใช้ย่อยทำให้เกิดกลิ่นเหม็น 
+      และวัดด้วยค่าบีโอดี (BOD) สารอนินทรีย์ เช่น คลอไรด์ ไนโตรเจน ฟอสฟอรัส 
+      และโลหะหนักอาจปนเปื้อนจากอุตสาหกรรมในบ้าน นอกจากนี้ยังมีน้ำมัน ไขมัน สารซักฟอก 
+      และธาตุอาหารที่ทำให้เกิดสาหร่ายบลูมและลดออกซิเจนในน้ำ 
+      กำมะถันในของเสียสามารถเปลี่ยนเป็นก๊าซไข่เน่า (H₂S) ในสภาวะไร้อากาศ 
+      ส่งกลิ่นเหม็นในระบบบำบัดน้ำเสียแบบไม่ใช้อากาศ
+    </p>
+  </div>
 
-<style>
-  .button-link {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #FF9149;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 16px;
-  text-align: center;
-  width: fit-content;
-}
-  
+  <!-- ปุ่มไปแบบทดสอบ -->
+  <a href="quiz.html" class="button-link">POST-TEST</a>
 
-  .button-link:hover {
-    background-color: #e4762f;
-  }
-</style>
+  <!-- สคริปต์ -->
+  <script>
+    function scrollToSection() {
+      document.querySelector(".container").scrollIntoView({ behavior: "smooth" });
+    }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const score = urlParams.get('score');
+    if (score !== null) {
+      document.getElementById("scoreDisplay").textContent = `คุณได้คะแนน ${score} จาก 8 ข้อปรนัย`;
+    }
+  </script>
 
-
-<!-- script -->
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const score = urlParams.get('score');
-  if (score !== null) {
-    document.getElementById("scoreDisplay").textContent = `คุณได้คะแนน ${score} จาก 8 ข้อปรนัย`;
-  }
-</script>
-
-
-
-
-
-<!-- ติดต่อเรา -->
-<div style="background-color: #e0f7fa; color: black; text-align: center; padding: 10px 0; font-size: 16px; margin-top: 40px;">
-  ติดต่อเรา: โทร. 012-345-6789 | Email: example@email.com
-</div>
+  <!-- ติดต่อเรา -->
+  <div style="background-color: #e0f7fa; color: black; text-align: center; padding: 10px 0; font-size: 16px; margin-top: 40px;">
+    ติดต่อเรา: โทร. 012-345-6789 | Email: example@email.com
+  </div>
 
 </body>
 </html>
