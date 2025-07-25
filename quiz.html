@@ -95,16 +95,7 @@
         <label><input type="radio" name="q3" value="D">  กรมทรัพยากรน้ำบาดาล </label>
       </div>
 
-      <!-- คำถามอัตนัย -->
-      <div class="question">
-        <p>4. ยกตัวอย่างแหล่งกำเนิดน้ำเสียที่คุณพบเห็นในชีวิตประจำวัน</p>
-        <textarea name="q9"></textarea>
-      </div>
-
-      <div class="question">
-        <p>5. แนวทางในการช่วยลดปริมาณน้ำเสียของคุณ?</p>
-        <textarea name="q10"></textarea>
-      </div>
+    
 
       <button type="button" onclick="checkAnswers()">CHECK</button>
     </form>
@@ -124,11 +115,10 @@
       }
     }
 
-    const q9 = encodeURIComponent(document.querySelector('textarea[name="q9"]').value.trim());
-    const q10 = encodeURIComponent(document.querySelector('textarea[name="q10"]').value.trim());
+    
 
     // ส่งค่าไป home.html พร้อมส่งต่อไป idea.html ทีหลัง
-    window.location.href = `home.html?score=${score}&q9=${q9}&q10=${q10}`;
+    window.location.href = `home.html?score=${score}`;
   }
 </script>
 

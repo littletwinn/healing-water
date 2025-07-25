@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bueng Makkasan</title>
+<style>
+  body {
+      margin: 0;
+      font-family: 'Leelawadee UI';
+      background-color: #fff2db;
+    }
+
+    .navbar {
+      background-color: #FFFDF6;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    .navbar a {
+      color: black;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: grey;
+      border-radius: 5px;
+    }
+
+    .main-title {
+      font-size: 60px;
+      text-align: center;
+      color: #c69fd5;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .divider {
+      width: 90%;
+      height: 2px;
+      background-color: black;
+      margin: 0 auto 30px auto;
+    }
+
+    .image-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+      width: 90%;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .image-box {
+      width: 48%;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .image-box p {
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border: 2px solid black;
+    }
+    
+
+    .source {
+      font-size: 14px;
+      color: black;
+      margin-top: 5px;
+    }
+
+    .dashed-line {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: calc(450px + 30px);
+      border-left: 2px dashed black;
+    }
+
+    .double-divider {
+      width: 90%;
+      height: 2px;
+      background-color: black;
+      margin: 30px auto 5px auto;
+    }
+
+    .double-divider + .double-divider {
+      margin-top: 7px;
+    }
+
+    .section {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .section h2 {
+      color: black;
+      margin-bottom: 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+    }
+
+    .section-content {
+      color: black;
+      line-height: 1.6;
+      font-size: 18px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .thin-line {
+      width: 90%;
+      height: 2px;
+      background-color: black;
+      margin: 30px auto;
+    }
+
+    @media (max-width: 768px) {
+      .image-section {
+        flex-direction: column;
+      }
+
+      .image-box {
+        width: 100%;
+      }
+
+      .dashed-line {
+        display: none;
+      }
+    }
+
+    .back-button {
+      display: inline-block;
+      background-color: #FF9149;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      position: fixed;
+      top: 10px;
+      right: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #e0e0e0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- แถบนำทาง -->
+  <div class="navbar">
+    <a href="home.html">HOME</a>
+    <a href="cause.html">CAUSE</a>
+    <a href="howto.html">HOW TO</a>
+    <a href="place.html">PLACE</a>
+    <a href="idea.html">IDEA BOX</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+
+  <a href="place.html" class="back-button">BACK</a>
+
+  <!-- หัวเรื่องหลัก -->
+  <div class="main-title">บึงมักกะสัน!</div>
+  
+    <div class="double-divider"></div>
+    <div class="double-divider"></div>
+
+
+  <!-- Before & After Image Section -->
+  <div class="image-section">
+    <div class="image-box">
+      <p>Before :</p>
+      <img src="B3.jpg" alt="Before Image">
+      <div class="source">ที่มา: https://phenud.wordpress.com/</div>
+    </div>
+
+    <div class="dashed-line"></div>
+
+    <div class="image-box">
+      <p>After :</p>
+      <img src="A3.jpg" alt="After Image">
+      <div class="source">ที่มา: https://www.porpeang.org/content/5658/โครงการบำบัดน้ำเสียโดยใช้พืช-บึงมักกะสัน-กรุงเทพมหานคร</div>
+    </div>
+  </div>
+
+  <div class="double-divider"></div>
+  <div class="double-divider"></div>
+
+  <!-- สาเหตุ -->
+  <div class="section">
+    <h2>สาเหตุหลัก</h2>
+    <div class="section-content">
+      น้ำเสียจากบ้านพักข้าราชการ และชุมชนโดยรอบที่ไม่มีระบบบำบัดน้ำเสีย ถูกปล่อยลงบึงโดยตรง
+    </div>
+  </div>
+
+  <div class="thin-line"></div>
+
+  <!-- แนวทางการบำบัด -->
+  <div class="section">
+    <h2>แนวทางการบำบัด</h2>
+    <div class="section-content">
+      โครงการบำบัดน้ำเสียโดยใช้พืช เช่น ผักตบชวา ร่วมกับเครื่องเติมอากาศ และการปรับปรุงระบบระบายน้ำภายในบึง สามารถบำบัดน้ำเสียได้มากถึง 260,000 ลบ.ม./วัน
+
+  <div class="thin-line"></div>
+
+  <!-- หน่วยงานที่เกี่ยวข้อง -->
+  <div class="section">
+    <h2>หน่วยงานที่เกี่ยวข้อง</h2>
+    <div class="section-content">
+      - การรถไฟแห่งประเทศไทย (รฟท.)<br>
+      - กรุงเทพมหานคร<br>
+      - มูลนิธิพอเพียง
+    </div>
+  </div>
+
+  <div class="thin-line"></div>
+
+  <!-- อ้างอิง -->
+  <div style="background-color: #e0f7fa; color: #685b5b; text-align: left; padding: 10px 0; font-size: 12px; margin-top: 40px;">
+  <h3 style="margin: 10px 30px;"> อ้างอิง : </h3>
+  <p style="margin: 10px 30px;">มูลนิธิพอเพียง. (2564). โครงการบำบัดน้ำเสียโดยใช้พืช บึงมักกะสัน กรุงเทพมหานคร. สืบค้นจาก https://www.porpeang.org/content/5658
+
+ </p>
+  </div>
+
+</body>
+</html>
