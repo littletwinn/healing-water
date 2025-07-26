@@ -43,8 +43,8 @@
     /* container before & after */
     .image-section {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
       margin: 0 auto 40px auto;
       width: 90%;
       padding: 20px;
@@ -53,23 +53,23 @@
 
     /* กล่องซ้าย - สีชมพู */
     .image-box.before {
-      width: 45%;
-      text-align: center;
-      background-color: #ffd7df; /* ชมพูอ่อน */
-      padding: 40px;
+      flex: 0 1 45%;
+      background-color: #ffd7df; 
+      padding: 30px;
       border-radius: 10px;
       box-sizing: border-box;
+      text-align: center;
       margin-left: 50px;
     }
 
     /* กล่องขวา - สีเขียว */
     .image-box.after {
-      width: 45%;
-      text-align: center;
-      background-color: #90c49f; /* เขียวอ่อน */
-      padding: 40px;
+      flex: 0 1 45%; /* ความกว้าง 45% */
+      background-color: #90c49f;
+      padding: 30px;
       border-radius: 10px;
       box-sizing: border-box;
+      text-align: center;
       margin-right: 50px;
     }
 
@@ -82,10 +82,12 @@
 
     .image-box img {
       width: 100%;
-      height: 250px;
+      height: 280px;
       object-fit: cover;
       border: 2px solid black;
       border-radius: 10px;
+      display: block;
+      margin: 0 auto;
     }
 
     .source {
@@ -126,7 +128,9 @@
 
       .image-box.before,
       .image-box.after {
-        width: 100%;
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
       }
 
       .main-title {
