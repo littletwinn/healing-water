@@ -8,7 +8,24 @@
     body {
       margin: 0;
       font-family: 'Leelawadee UI';
-      background-color: #AFDDFF;
+    
+    }
+
+
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      z-index: -1;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+
+    .content-overlay {
+      position: relative;
+      z-index: 1;
     }
 
     .navbar {
@@ -88,6 +105,11 @@
 </head>
 <body>
 
+  <!-- พื้นหลังวิดีโอ -->
+  <video autoplay muted loop id="bg-video">
+    <source src="water.mp4" type="video/mp4">
+  </video>
+
   <!-- แถบนำทาง -->
   <div class="navbar">
     <a href="home.html">HOME</a>
@@ -100,8 +122,8 @@
 
   <!-- เนื้อหาหลัก -->
   <div class="content">
-    <h1 style="color: white;">WELCOME!</h1>
-    <h2 style="color: white;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
+    <h1 style="color: #310e10;">WELCOME!</h1>
+    <h2 style="color: #45422a;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
     <p id="scoreDisplay" style="color:red; font-size: 20px;"></p>
 
     <!-- ปุ่มลูกศรลง -->
