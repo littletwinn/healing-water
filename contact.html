@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <title>CONTACT</title>
- <style>
+  <meta charset="UTF-8">
+  <title>Vertical Containers</title>
+  <style>
     body {
+      font-family: 'Leelawadee UI', sans-serif;
+      background-color: #FFF7ED;
       margin: 0;
-      font-family: 'Leelawadee UI';
-      background-color: #FFF2EB;
       
     }
 
     .navbar {
-      background-color:#FFFDF6 ;
+      background-color: #FFFDF6;
       display: flex;
       justify-content: center;
       padding: 10px 0;
@@ -31,34 +31,40 @@
       border-radius: 5px;
     }
 
-  
-
-    a:hover {
-      text-decoration: underline;
-    }
-
     .container {
-      background-color: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      height: auto;
-      width: 70%;
-      text-align: left;
-      margin: 40px auto;
+      width: 100%;
+      max-width: 600px;
+      background-color:white;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    
+    .container:hover {
+      transform: scale(1.15);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
     h2 {
-      color: #FFD66B;
+      color: #75070c;
+      margin-bottom: 10px;
     }
+
+    p {
+      color: black;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    
+
     
   </style>
-
 </head>
-
-
 <body>
-  <!-- แถบนำทาง -->
+
   <div class="navbar">
     <a href="home.html">HOME</a>
     <a href="cause.html">CAUSE</a>
@@ -68,15 +74,26 @@
     <a href="contact.html">CONTACT</a>
   </div>
 
-
+  
 
   <div class="container">
-    
-    <h2> ㋡ CONTACT US</h2>
-    <p style="color: #FF9149;">
-      ติดต่อเรา: โทร. 012-345-6789 | Email: example@email.com
-    </p>
+    <h2>กรมควบคุมมลพิษ(PCD)</h2>
+    <p>วางนโยบาย ควบคุม กำกับดูแล และสนับสนุนโครงการบำบัดน้ำเสียทั่วประเทศ<br>https://www.pcd.go.th<br>☏ : 0-2298-2000</p>
+  </div>
 
+  <div class="container">
+    <h2>การประปานครหลวง(MWA)</h2>
+    <p>ให้บริการน้ำประปาและมีส่วนเกี่ยวข้องในโครงการจัดการน้ำเสียบางส่วน<br>https://www.mwa.co.th<br>☏ : 1125</p>
+  </div>
+
+  <div class="container">
+    <h2>สำนักงานสิ่งแวดล้อมภาค</h2>
+    <p>ใตรวจวัดคุณภาพน้ำ ควบคุมมลพิษในแต่ละภูมิภาค<br>
+  </div>
+
+  <div class="container">
+    <h2 style="color: #454645;">㋡ CONTACT US</h2>
+    <p>โทร. 012-345-6789<br>Email: example@email.com</p>
   </div>
 </body>
 </html>

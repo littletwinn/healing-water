@@ -64,11 +64,17 @@
       margin: 40px auto;
     }
 
+    .container:hover {
+      transform: scale(1.15);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+
     .button-link {
       display: inline-block;
       margin: 20px auto;
       padding: 10px 20px;
-      background-color:#7EACB5;
+      background-color:#a3a380;
       color: #fff7e4;
       text-decoration: none;
       border-radius: 10px;
@@ -81,7 +87,7 @@
     }
 
     .button-link:hover {
-      background-color: #00809D;
+      background-color: #6e6e4f;
     }
 
     .circle-button-big {
@@ -132,7 +138,7 @@
   <div class="content">
     <h1 style="color: #380c0d; font-size: 70px;">WELCOME!</h1>
     <h2 style="color: #514e2d;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
-    <p id="scoreDisplay" style="color:red; font-size: 20px;"></p>
+    <p id="scoreDisplay" style="color:red; font-size: 24px;"></p>
 
     <!-- ปุ่มลูกศรลง -->
     <button class="circle-button-big" onclick="scrollToSection()">&#x2193;</button>
@@ -166,7 +172,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const score = urlParams.get('score');
     if (score !== null) {
-      document.getElementById("scoreDisplay").textContent = `คุณได้คะแนน ${score} จาก 3 ข้อปรนัย`;
+      document.getElementById("scoreDisplay").textContent = `คุณได้คะแนน ${score} จาก 5`;
     }
   </script>
 
