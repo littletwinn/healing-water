@@ -6,10 +6,12 @@
   <style>
     body {
       font-family: 'Leelawadee UI';
-      background-color: #FFF4EA;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
+      text-align: center;
+      padding: 60px;
+      background-image: url('Picwater2.jpg'); /* เปลี่ยนเป็นชื่อไฟล์ของคุณ */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .container {
@@ -17,115 +19,124 @@
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 90%;
+      height: 90%;
+      margin: auto;
     }
 
     h2 {
       color: #60B5FF;
-    }
-
-    .question {
       margin-bottom: 20px;
     }
 
-    .question p {
+    .question {
+      padding-top: 30px;
+      font-size: 30px;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 20px;
       color: #484966;
     }
 
-    textarea {
-      width: 100%;
-      height: 100px;
-      font-size: 16px;
-      padding: 10px;
-      border-radius: 35px;
+    .options-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 10px;
+      justify-items: center;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #FF9149;
-      color: white;
+    .option-btn {
+      width: 100%;       /* ให้เต็มช่อง grid */
+      min-height: 150px;  /* กำหนดความสูงขั้นต่ำ */
+      padding: 20px;     /* เพิ่ม padding ให้ปุ่มดูใหญ่และมีพื้นที่มากขึ้น */
+      background-color: #93ac5a;
+      color: #f0e6da;   /* เปลี่ยนสีตัวอักษรเป็นขาว */
       border: none;
-      border-radius: 5px;
-      font-size: 16px;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 20px;   /* ตัวหนังสือใหญ่ขึ้น */
+      transition: background-color 0.2s ease;
     }
 
-    label {
-      color: #484966;
+  .option-btn:hover {
+      background-color:#88a544;
     }
-
     
-
   </style>
-
-
-
 </head>
 <body>
 
   <div class="container">
-    <h2>แบบทดสอบเรื่อง “น้ำเสียและการบำบัดน้ำเสีย”</h2>
-
-    <form id="quizForm">
-      <!-- คำถามปรนัย -->
-      <div class="question">
-        <p>1. การบำบัดน้ำเสียมีความสำคัญอย่างไร?</p>
-        <label><input type="radio" name="q1" value="A">  เพื่อเพิ่มจำนวนปลาน้ำจืด</label><br>
-        <label><input type="radio" name="q1" value="B">  เพื่อควบคุมระดับน้ำในแม่น้ำ</label><br>
-        <label><input type="radio" name="q1" value="C">  เพื่อลดมลพิษก่อนปล่อยลงแหล่งน้ำ</label><br>
-        <label><input type="radio" name="q1" value="D">  เพื่อผลิตไฟฟ้า</label>
-      </div>
-
-      <div class="question">
-        <p>2. กระบวนการใดต่อไปนี้ใช้ในการบำบัดน้ำเสีย?</p>
-        <label><input type="radio" name="q2" value="A">  การระเหย</label><br>
-        <label><input type="radio" name="q2" value="B">  การตากแดด</label><br>
-        <label><input type="radio" name="q2" value="C">  การเติมอากาศ (Aeration)</label><br>
-        <label><input type="radio" name="q2" value="D">  การกรองด้วยทรายเพียงอย่างเดียว</label>
-      </div>
-
-
-      <div class="question">
-        <p>3. ข้อใดเป็นหน่วยงานที่มีหน้าที่ดูแลและควบคุมการบำบัดน้ำเสียในประเทศไทย?</p>
-        <label><input type="radio" name="q3" value="A">  กระทรัพยากรธรรมชาติและสิ่งแวดล้อม</label><br>
-        <label><input type="radio" name="q3" value="B">  กรมควบคุมมลพิษ</label><br>
-        <label><input type="radio" name="q3" value="C">  กรมการเปลี่ยนแปลงสภาพภูมิอากาศและสิ่งแวดล้อม</label><br>
-        <label><input type="radio" name="q3" value="D">  กรมทรัพยากรน้ำบาดาล </label>
-      </div>
-
-    
-
-      <button type="button" onclick="checkAnswers()">CHECK</button>
-    </form>
+    <img src="TITLE2.png" alt="Welcome Image" style="width: 200%; max-width: 400px; border-radius: 15px;">
+    <div id="question" class="question">คำถามจะปรากฏตรงนี้</div>
+    <div id="options" class="options-container"></div>
   </div>
 
   <script>
-  function checkAnswers() {
-    const answers = {
-      q1: 'C', q2: 'C',  q3: 'B'
-    };
-
-    let score = 0;
-    for (let key in answers) {
-      const selected = document.querySelector(`input[name="${key}"]:checked`);
-      if (selected && selected.value === answers[key]) {
-        score++;
+    const questions = [
+      {
+        question: "การบำบัดน้ำเสียมีความสำคัญอย่างไร?",
+        options: [
+          { text: "เพื่อเพิ่มจำนวนปลาน้ำจืด", value: "A" },
+          { text: "เพื่อควบคุมระดับน้ำในแม่น้ำ", value: "B" },
+          { text: "เพื่อลดมลพิษก่อนปล่อยลงแหล่งน้ำ", value: "C" },
+          { text: "เพื่อผลิตไฟฟ้า", value: "D" }
+        ],
+        answer: "C"
+      },
+      {
+        question: "กระบวนการใดต่อไปนี้ใช้ในการบำบัดน้ำเสีย?",
+        options: [
+          { text: "การระเหย", value: "A" },
+          { text: "การตากแดด", value: "B" },
+          { text: "การเติมอากาศ (Aeration)", value: "C" },
+          { text: "การกรองด้วยทรายเพียงอย่างเดียว", value: "D" }
+        ],
+        answer: "C"
+      },
+      {
+        question: "ข้อใดเป็นหน่วยงานที่มีหน้าที่ดูแลและควบคุมการบำบัดน้ำเสียในประเทศไทย?",
+        options: [
+          { text: "กระทรัพยากรธรรมชาติและสิ่งแวดล้อม", value: "A" },
+          { text: "กรมควบคุมมลพิษ", value: "B" },
+          { text: "กรมการเปลี่ยนแปลงสภาพภูมิอากาศและสิ่งแวดล้อม", value: "C" },
+          { text: "กรมทรัพยากรน้ำบาดาล", value: "D" }
+        ],
+        answer: "B"
       }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('question').textContent = q.question;
+
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = "";
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => {
+          if (opt.value === q.answer) {
+            score++;
+          }
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            window.location.href = `home.html?score=${score}`;
+          }
+        };
+        optionsDiv.appendChild(btn);
+      });
     }
 
-    
-
-    // ส่งค่าไป home.html พร้อมส่งต่อไป idea.html ทีหลัง
-    window.location.href = `home.html?score=${score}`;
-  }
-</script>
-
-  
-
-
-  
+    showQuestion();
+  </script>
 
 </body>
 </html>
