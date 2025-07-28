@@ -163,7 +163,32 @@
     }
 
     showQuestion();
+
   </script>
+
+<!-- Firebase App (core) -->
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+
+<!-- Firestore -->
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js"></script>
+
+<script>
+  // Firebase configuration (แทนที่ด้วยของคุณ)
+  const firebaseConfig = {
+      apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
+      authDomain: "healer-wating.firebaseapp.com",
+      projectId: "healer-wating",
+      storageBucket: "healer-wating.firebasestorage.app",
+      messagingSenderId: "723339403882",
+      appId: "1:723339403882:web:3f23f47a9cedce6e69e013",
+      measurementId: "G-JNCLBF382P"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+
 
 </body>
 </html>

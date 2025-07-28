@@ -2,20 +2,28 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <title>IDEA</title>
-  
+  <title>IDEA BOX</title>
   <style>
     body {
-      margin: 0;
       font-family: 'Leelawadee UI';
-      background-color: #AFDDFF;
+      background-color: #d2e9b0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+      margin: 0;
     }
 
     .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       background-color: #FFFDF6;
       display: flex;
       justify-content: center;
       padding: 10px 0;
+      z-index: 1000;
     }
 
     .navbar a {
@@ -23,82 +31,41 @@
       padding: 14px 20px;
       text-decoration: none;
       font-size: 16px;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    .navbar a:hover {
-      color: grey;
-      border-radius: 5px;
-    }
-
-    .content {
-      padding: 40px;
+    .box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
+      max-width: 600px;
+      width: 80%;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #4f6815;
+    }
+
+    .delete-button {
+      margin-top: 10px;
+      padding: 6px 16px;
+      background-color: #75070c;
       color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .box-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      padding: 40px;
-    }
-
-    .boxidea {
-      width: 250px;
-      height: 400px;
-      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-      border-radius: 30px;
-      overflow: hidden;
-      background-color: #fff;
-    }
-
-    .boxidea .img {
-      height: 150px;
-      background: whitesmoke;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .boxidea .img img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: cover;
-    }
-
-    .boxidea .content {
-      padding: 10px;
-      color: #333;
-      height: fit-content;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .boxidea .content h1 {
-      font-size: 24px;
-      color: black;
-      text-align: center;
-    }
-
-    .boxidea .content p {
-      font-size: 16px;
-      line-height: 1.5;
-      text-align: center;
-      white-space: pre-wrap;
+    .delete-button:hover {
+      background-color: #a00a14;
     }
   </style>
 </head>
 <body>
 
-  <!-- แถบนำทาง -->
   <div class="navbar">
     <a href="home.html">HOME</a>
     <a href="cause.html">CAUSE</a>
@@ -108,154 +75,45 @@
     <a href="contact.html">CONTACT</a>
   </div>
 
-  <!-- กล่องไอเดีย -->
-  <div class="box-container" id="boxContainer"> 
-
-    
-    <!-- ไอเดียที่1 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-  <!-- ไอเดียที่2 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-  <!-- ไอเดียที่3 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-   
-    
-  <!-- ไอเดียที่4 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-    <!-- ไอเดียที่5 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-    <!-- ไอเดียที่6 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-    <!-- ไอเดียที่7 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-    <!-- ไอเดียที่8 -->
-    <div class="boxidea">
-      <div class="img">
-        <img src="white" alt="">
-      </div>
-      <div class="content">
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui repellendus fugiat et nam cumque autem consectetur pariatur nihil ab a.
-        </p>
-      </div>
-    </div>
-
-  </div>
-
-
+  <h2>💡 ไอเดียจากคุณ</h2>
+  <div id="ideaList"></div>
 
   <script>
-    // ดึงค่า query params จาก URL
     const params = new URLSearchParams(window.location.search);
-    const score = params.get('score');
-    const q9 = params.get('q9');
-    const q10 = params.get('q10');
+    const q0 = params.get('q0');
 
-    if (score !== null || q9 !== null || q10 !== null) {
-      const ideaQ9 = q9 ? decodeURIComponent(q9) : 'ไม่มีคำตอบ';
-      const ideaQ10 = q10 ? decodeURIComponent(q10) : 'ไม่มีคำตอบ';
+    let ideas = JSON.parse(localStorage.getItem("ideas") || "[]");
 
-      // สร้างกล่องไอเดียใหม่จากคำตอบแบบทดสอบ
-      const newBox = document.createElement('div');
-      newBox.classList.add('boxidea');
+    if (q0 && q0.trim() !== "") {
+      ideas.push(q0.trim());
+      localStorage.setItem("ideas", JSON.stringify(ideas));
+    }
 
-      newBox.innerHTML = `
-        <div class="img">
-          <img src="white" alt="">
-        </div>
-        <div class="content">
-          
-          <p>คะแนนปรนัย: ${score !== null ? score + ' / 8' : 'ไม่มีคะแนน'}</p>
-          <p>แหล่งกำเนิดน้ำเสียที่พบเห็น:<br>${ideaQ9}</p>
-          <p>แนวทางลดน้ำเสียของคุณ:<br>${ideaQ10}</p>
-        </div> 
+    const ideaListDiv = document.getElementById("ideaList");
 
+    if (ideas.length === 0) {
+      ideaListDiv.innerHTML = "<p>ยังไม่มีไอเดียถูกส่งมา</p>";
+    } else {
+      ideas.forEach((idea, index) => {
+        const box = document.createElement("div");
+        box.className = "box";
+        box.innerHTML = `
+          <p>${idea}</p>
+          <button class="delete-button" onclick="deleteIdea(${index})">ลบ</button>
+        `;
+        ideaListDiv.appendChild(box);
+      });
+    }
 
-      `;
-
-      document.getElementById('boxContainer').appendChild(newBox);
+    function deleteIdea(index) {
+      ideas.splice(index, 1);
+      localStorage.setItem("ideas", JSON.stringify(ideas));
+      location.reload();
     }
   </script>
 
-  
-
 </body>
 </html>
+
+
 
