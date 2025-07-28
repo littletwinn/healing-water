@@ -79,13 +79,27 @@
   <div id="ideaList"></div>
 
   <script>
+    // ฟังก์ชันแปลง timestamp เป็นข้อความวันเวลา
+    function formatDateTime(date) {
+      return date.toLocaleString('th-TH', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+    }
+
     const params = new URLSearchParams(window.location.search);
     const q0 = params.get('q0');
 
     let ideas = JSON.parse(localStorage.getItem("ideas") || "[]");
 
     if (q0 && q0.trim() !== "") {
-      ideas.push(q0.trim());
+      const now = new Date();
+      const formattedIdea = `${q0.trim()}<br><small style="color:gray;">ส่งเมื่อ: ${formatDateTime(now)}</small>`;
+      ideas.push(formattedIdea);
       localStorage.setItem("ideas", JSON.stringify(ideas));
     }
 
@@ -114,6 +128,3 @@
 
 </body>
 </html>
-
-
-

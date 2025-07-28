@@ -64,12 +64,16 @@
     }
 
     @media (max-width: 480px) {
-  .options-container {
-    grid-template-columns: 1fr;
-    }
-  } 
-    
+      .options-container {
+        grid-template-columns: 1fr;
+      }
+    } 
   </style>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 </head>
 <body>
 
@@ -80,6 +84,21 @@
   </div>
 
   <script>
+    // Firebase config ของคุณ
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
+      authDomain: "healer-wating.firebaseapp.com",
+      projectId: "healer-wating",
+      storageBucket: "healer-wating.firebasestorage.app",
+      messagingSenderId: "723339403882",
+      appId: "1:723339403882:web:3f23f47a9cedce6e69e013",
+      measurementId: "G-JNCLBF382P"
+    };
+
+    // เริ่ม Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
     const questions = [
       {
         question: "การบำบัดน้ำเสียมีความสำคัญอย่างไร?",
@@ -129,7 +148,7 @@
           { text: "น้ำเสียจากครัวเรือน เช่น ห้องน้ำ ห้องครัว และซักล้าง ถูกปล่อยลงคลองโดยตรงโดยไม่มีระบบบำบัดในระดับชุมชน", value: "C" },
           { text: "มีแหล่งน้ำธรรมชาติขนาดใหญ่ที่สามารถเจือจางน้ำเสียได้โดยไม่ต้องมีระบบบำบัด", value: "D" }
         ],
-        answer: "c"
+        answer: "C"  // แก้ให้เป็นตัวใหญ่ C ตามมาตรฐาน
       }
     ];
 
@@ -148,14 +167,28 @@
         btn.className = 'option-btn';
         btn.textContent = opt.text;
         btn.onclick = () => {
-          if (opt.value === q.answer) {
+          // เช็คคำตอบ (ไม่สนใจตัวพิมพ์เล็ก/ใหญ่)
+          if (opt.value.toUpperCase() === q.answer.toUpperCase()) {
             score++;
           }
           currentQuestion++;
           if (currentQuestion < questions.length) {
             showQuestion();
           } else {
-            window.location.href = `home.html?score=${score}`;
+            // ส่งคะแนนไป Firestore ก่อนเปลี่ยนหน้า
+            db.collection("quizResults").add({
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              score: score,
+              total: questions.length
+            })
+            .then(() => {
+              // ส่งเสร็จแล้วเปลี่ยนหน้า
+              window.location.href = `home.html?score=${score}`;
+            })
+            .catch((error) => {
+              console.error("ส่งข้อมูลล้มเหลว: ", error);
+              alert("เกิดข้อผิดพลาดในการบันทึกคะแนน");
+            });
           }
         };
         optionsDiv.appendChild(btn);
@@ -163,33 +196,9 @@
     }
 
     showQuestion();
-
   </script>
-
-<!-- Firebase App (core) -->
-<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
-
-<!-- Firestore -->
-<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js"></script>
-
-<script>
-  // Firebase configuration (แทนที่ด้วยของคุณ)
-  const firebaseConfig = {
-      apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
-      authDomain: "healer-wating.firebaseapp.com",
-      projectId: "healer-wating",
-      storageBucket: "healer-wating.firebasestorage.app",
-      messagingSenderId: "723339403882",
-      appId: "1:723339403882:web:3f23f47a9cedce6e69e013",
-      measurementId: "G-JNCLBF382P"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-</script>
-
 
 </body>
 </html>
+
 
