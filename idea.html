@@ -47,22 +47,11 @@
     h2 {
       color: #4f6815;
     }
-
-    .delete-button {
-      margin-top: 10px;
-      padding: 6px 16px;
-      background-color: #75070c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .delete-button:hover {
-      background-color: #a00a14;
-    }
   </style>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -79,7 +68,20 @@
   <div id="ideaList"></div>
 
   <script>
-    // ฟังก์ชันแปลง timestamp เป็นข้อความวันเวลา
+    // Firebase config ของคุณ
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
+      authDomain: "healer-wating.firebaseapp.com",
+      projectId: "healer-wating",
+      storageBucket: "healer-wating.appspot.com",
+      messagingSenderId: "723339403882",
+      appId: "1:723339403882:web:3f23f47a9cedce6e69e013",
+      measurementId: "G-JNCLBF382P"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
     function formatDateTime(date) {
       return date.toLocaleString('th-TH', {
         year: 'numeric',
@@ -94,37 +96,39 @@
     const params = new URLSearchParams(window.location.search);
     const q0 = params.get('q0');
 
-    let ideas = JSON.parse(localStorage.getItem("ideas") || "[]");
-
+    // บันทึกไอเดียไป Firestore ถ้ามี q0
     if (q0 && q0.trim() !== "") {
-      const now = new Date();
-      const formattedIdea = `${q0.trim()}<br><small style="color:gray;">ส่งเมื่อ: ${formatDateTime(now)}</small>`;
-      ideas.push(formattedIdea);
-      localStorage.setItem("ideas", JSON.stringify(ideas));
+      db.collection("ideas").add({
+        text: q0.trim(),
+        createdAt: firebase.firestore.Timestamp.fromDate(new Date())
+      }).then(() => {
+        console.log("ไอเดียถูกบันทึกแล้ว");
+      }).catch((error) => {
+        console.error("เกิดข้อผิดพลาด:", error);
+      });
     }
 
     const ideaListDiv = document.getElementById("ideaList");
 
-    if (ideas.length === 0) {
-      ideaListDiv.innerHTML = "<p>ยังไม่มีไอเดียถูกส่งมา</p>";
-    } else {
-      ideas.forEach((idea, index) => {
+    // ดึงและแสดงไอเดียจาก Firestore
+    db.collection("ideas").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
+      ideaListDiv.innerHTML = "";
+
+      if (snapshot.empty) {
+        ideaListDiv.innerHTML = "<p>ยังไม่มีไอเดียถูกส่งมา</p>";
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const idea = doc.data();
         const box = document.createElement("div");
         box.className = "box";
         box.innerHTML = `
-          <p>${idea}</p>
-          <button class="delete-button" onclick="deleteIdea(${index})">ลบ</button>
+          <p>${idea.text}<br><small style="color:gray;">ส่งเมื่อ: ${formatDateTime(idea.createdAt.toDate())}</small></p>
         `;
         ideaListDiv.appendChild(box);
       });
-    }
-
-    function deleteIdea(index) {
-      ideas.splice(index, 1);
-      localStorage.setItem("ideas", JSON.stringify(ideas));
-      location.reload();
-    }
+    });
   </script>
-
 </body>
 </html>
