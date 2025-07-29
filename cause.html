@@ -37,26 +37,40 @@
     }
 
     .container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
       padding: 40px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       width: 70%;
       text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .container:hover {
       transform: scale(1.15);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
-    /* สีพื้นหลังแบบสลับ */
+    .container img {
+      width: 200px;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    .container-content {
+      flex: 1;
+    }
+
     .wrapper:nth-of-type(odd) .container {
-      background-color: #4f6815; /* เขียวเข้ม */
-      color: #fff3e5; /* สีตัวหนังสืออ่อน */
+      background-color: #4f6815;
+      color: #fff3e5;
     }
 
     .wrapper:nth-of-type(even) .container {
-      background-color: #fff3e5; /* ขาวอมครีม */
-      color: #4f6815; /* สีตัวหนังสือเข้ม */
+      background-color: #fff3e5;
+      color: #4f6815;
     }
   </style>
 </head>
@@ -72,60 +86,72 @@
     <a href="contact.html">CONTACT</a>
   </div>
 
-  <!-- กล่องเนื้อหา1 -->
+  <!-- กล่องเนื้อหา 1 -->
   <div class="wrapper">
     <div class="container">
-      <h2>1. น้ำเสียจากครัวเรือน</h2>
-      <p>เกิดจากการใช้ชีวิตประจำวันในบ้าน เช่น:</p>
-      <ul>
-        <li>การอาบน้ำ</li>
-        <li>การขับถ่าย</li>
-        <li>การทำความสะอาด</li>
-        <li>การล้างจานชาม</li>
-        <li>การซักผ้า</li>
-        <li>การประกอบอาหาร</li>
-      </ul>
+      <img src="1.png" alt="ครัวเรือน" />
+      <div class="container-content">
+        <h2>1. น้ำเสียจากครัวเรือน</h2>
+        <p>เกิดจากการใช้ชีวิตประจำวันในบ้าน เช่น:</p>
+        <ul>
+          <li>การอาบน้ำ</li>
+          <li>การขับถ่าย</li>
+          <li>การทำความสะอาด</li>
+          <li>การล้างจานชาม</li>
+          <li>การซักผ้า</li>
+          <li>การประกอบอาหาร</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <!-- กล่องเนื้อหา2 -->
+  <!-- กล่องเนื้อหา 2 -->
   <div class="wrapper">
     <div class="container">
-      <h2>2. น้ำเสียจากกิจกรรมเชิงพาณิชย์</h2>
-      <p>เกิดจากร้านค้าต่างๆ ในชุมชน เช่น:</p>
-      <ul>
-        <li>ร้านอาหาร</li>
-        <li>ตลาดสด</li>
-        <li>ร้านค้า</li>
-        <li>ห้างสรรพสินค้า</li>
-      </ul>
-      <p>มักมีเศษอาหาร ไขมัน และสารเคมีปนเปื้อน</p>
+      <img src="2.png" alt="กิจกรรมเชิงพาณิชย์" />
+      <div class="container-content">
+        <h2>2. น้ำเสียจากกิจกรรมเชิงพาณิชย์</h2>
+        <p>เกิดจากร้านค้าต่างๆ ในชุมชน เช่น:</p>
+        <ul>
+          <li>ร้านอาหาร</li>
+          <li>ตลาดสด</li>
+          <li>ร้านค้า</li>
+          <li>ห้างสรรพสินค้า</li>
+        </ul>
+        <p>มักมีเศษอาหาร ไขมัน และสารเคมีปนเปื้อน</p>
+      </div>
     </div>
   </div>
 
-  <!-- กล่องเนื้อหา3 -->
+  <!-- กล่องเนื้อหา 3 -->
   <div class="wrapper">
     <div class="container">
-      <h2>3. น้ำเสียจากสถานประกอบการ</h2>
-      <p>เกิดจากองค์กรหรือสถาบันที่มีผู้ใช้งานจำนวนมาก เช่น:</p>
-      <ul>
-        <li>โรงแรม</li>
-        <li>โรงเรียน</li>
-        <li>สถาบันการศึกษา</li>
-      </ul>
-      <p>น้ำเสียมาจากห้องน้ำ ห้องส้วม และกิจกรรมของผู้ใช้บริการ</p>
+      <img src="3.png" alt="สถานประกอบการ" />
+      <div class="container-content">
+        <h2>3. น้ำเสียจากสถานประกอบการ</h2>
+        <p>เกิดจากองค์กรหรือสถาบันที่มีผู้ใช้งานจำนวนมาก เช่น:</p>
+        <ul>
+          <li>โรงแรม</li>
+          <li>โรงเรียน</li>
+          <li>สถาบันการศึกษา</li>
+        </ul>
+        <p>น้ำเสียมาจากห้องน้ำ ห้องส้วม และกิจกรรมของผู้ใช้บริการ</p>
+      </div>
     </div>
   </div>
 
-  <!-- กล่องเนื้อหา4 -->
+  <!-- กล่องเนื้อหา 4 -->
   <div class="wrapper">
     <div class="container">
-      <h2>4. น้ำเสียจากกิจกรรมอื่น ๆ ในชุมชน</h2>
-      <ul>
-        <li>น้ำเสียจากตลาดสด</li>
-        <li>น้ำฝนที่ไหลผ่านพื้นที่มีสิ่งปฏิกูล</li>
-      </ul>
-      <p>มักปนเปื้อนสิ่งสกปรก เช่น ขยะ เศษอาหาร และสารเคมี</p>
+      <img src="4.png" alt="กิจกรรมในชุมชน" />
+      <div class="container-content">
+        <h2>4. น้ำเสียจากกิจกรรมอื่น ๆ ในชุมชน</h2>
+        <ul>
+          <li>น้ำเสียจากตลาดสด</li>
+          <li>น้ำฝนที่ไหลผ่านพื้นที่มีสิ่งปฏิกูล</li>
+        </ul>
+        <p>มักปนเปื้อนสิ่งสกปรก เช่น ขยะ เศษอาหาร และสารเคมี</p>
+      </div>
     </div>
   </div>
 
