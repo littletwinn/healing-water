@@ -33,19 +33,31 @@
       font-size: 16px;
     }
 
+    h2 {
+      color: #4f6815;
+      margin-bottom: 20px;
+    }
+
+    /* container ไอเดียเป็น flex แนวนอน wrap ได้ */
+    #ideaList {
+      display: flex;
+      flex-wrap: wrap;       /* ให้ขึ้นบรรทัดใหม่เมื่อไม่พอ */
+      justify-content: center;
+      gap: 20px;             /* ช่องว่างระหว่างกล่อง */
+      padding: 20px;
+      max-width: 900px;      /* กำหนดความกว้างสูงสุดเพื่อจัดแนวกลาง */
+      box-sizing: border-box;
+      width: 100%;
+    }
+
     .box {
       background-color: white;
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
-      max-width: 600px;
-      width: 80%;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      color: #4f6815;
+      width: 250px;          /* กำหนดความกว้างกล่อง */
+      box-sizing: border-box;
     }
   </style>
 

@@ -59,15 +59,49 @@
       transition: background-color 0.2s ease;
     }
 
-  .option-btn:hover {
-      background-color:#6d7e83;
+    .option-btn:hover {
+      background-color: #6d7e83;
     }
 
     @media (max-width: 480px) {
       .options-container {
         grid-template-columns: 1fr;
       }
-    } 
+    }
+
+    #ageQuestion {
+      display: none;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 90%;
+      margin: auto;
+    }
+
+    input[type="text"] {
+      font-size: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 100px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #60B5FF;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3c95d9;
+    }
   </style>
 
   <!-- Firebase SDKs -->
@@ -77,28 +111,45 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- คำถามแบบปรนัย -->
+  <div class="container" id="quizContainer">
     <img src="TITLE2.png" alt="Welcome Image" style="width: 200%; max-width: 400px; border-radius: 15px;">
     <div id="question" class="question">คำถามจะปรากฏตรงนี้</div>
     <div id="options" class="options-container"></div>
   </div>
 
+  <!-- คำถามเรทอายุ -->
+  <div id="ageQuestion">
+    <div class="question">กรุณาใส่ช่วงอายุของคุณ (1-6)</div>
+    <input id="ageInput" type="text" maxlength="1" placeholder="1-6" />
+    <textarea id="ageInput" rows="7" placeholder="กรุณาตอบตามความจริง
+      1 => ต่ำกว่า 12
+      2 => 12 - 24
+      3 => 25 - 35
+      4 => 36 - 50
+      5 => 51 - 60
+      6 => 60 ขึ้นไป"></textarea>
+    
+    <br>
+    <button onclick="submitAge()">ส่งข้อมูล</button>
+  </div>
+
   <script>
-    // Firebase config ของคุณ
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
       authDomain: "healer-wating.firebaseapp.com",
       projectId: "healer-wating",
-      storageBucket: "healer-wating.firebasestorage.app",
+      storageBucket: "healer-wating.appspot.com",
       messagingSenderId: "723339403882",
       appId: "1:723339403882:web:3f23f47a9cedce6e69e013",
       measurementId: "G-JNCLBF382P"
     };
 
-    // เริ่ม Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // คำถามแบบปรนัย 5 ข้อ
     const questions = [
       {
         question: "การบำบัดน้ำเสียมีความสำคัญอย่างไร?",
@@ -141,20 +192,21 @@
         answer: "B"
       },
       {
-        question: "จากสถานการณ์น้ำเสียในกรุงเทพมหานคร ต่อไปนี้ข้อใดเป็นเหตุผลหลักที่ทำให้โครงการบำบัดน้ำเสียในพื้นที่บริเวณมีนบุรีเน้นการติดตั้งระบบบำบัดน้ำเสียรายครัวเรือนควบคู่กับระบบบำบัดรวมชุมชน?",
+        question: "จากสถานการณ์น้ำเสียในกรุงเทพมหานคร ข้อใดเป็นเหตุผลหลักที่โครงการมีนบุรีเน้นระบบบำบัดรายครัวเรือน?",
         options: [
-          { text: "น้ำเสียในพื้นที่นี้มีปริมาณน้อยและกระจายตัว ทำให้ระบบบำบัดรวมไม่คุ้มค่าต่อการลงทุน", value: "A" },
-          { text: "น้ำเสียส่วนใหญ่เกิดจากโรงงานอุตสาหกรรมที่ต้องการการบำบัดเฉพาะจุด", value: "B" },
-          { text: "น้ำเสียจากครัวเรือน เช่น ห้องน้ำ ห้องครัว และซักล้าง ถูกปล่อยลงคลองโดยตรงโดยไม่มีระบบบำบัดในระดับชุมชน", value: "C" },
-          { text: "มีแหล่งน้ำธรรมชาติขนาดใหญ่ที่สามารถเจือจางน้ำเสียได้โดยไม่ต้องมีระบบบำบัด", value: "D" }
+          { text: "น้ำเสียมีปริมาณน้อยและกระจายตัว", value: "A" },
+          { text: "น้ำเสียจากโรงงานต้องบำบัดเฉพาะจุด", value: "B" },
+          { text: "น้ำเสียจากครัวเรือนถูกปล่อยลงคลองโดยตรง", value: "C" },
+          { text: "มีแหล่งน้ำธรรมชาติที่เจือจางได้", value: "D" }
         ],
-        answer: "C"  
+        answer: "C"
       }
     ];
 
     let currentQuestion = 0;
     let score = 0;
 
+    // ฟังก์ชันแสดงคำถาม
     function showQuestion() {
       const q = questions[currentQuestion];
       document.getElementById('question').textContent = q.question;
@@ -167,7 +219,6 @@
         btn.className = 'option-btn';
         btn.textContent = opt.text;
         btn.onclick = () => {
-          // เช็คคำตอบ (ไม่สนใจตัวพิมพ์เล็ก/ใหญ่)
           if (opt.value.toUpperCase() === q.answer.toUpperCase()) {
             score++;
           }
@@ -175,30 +226,80 @@
           if (currentQuestion < questions.length) {
             showQuestion();
           } else {
-            // ส่งคะแนนไป Firestore ก่อนเปลี่ยนหน้า
-            db.collection("quizResults").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              score: score,
-              total: questions.length
-            })
-            .then(() => {
-              // ส่งเสร็จแล้วเปลี่ยนหน้า
-              window.location.href = `home.html?score=${score}`;
-            })
-            .catch((error) => {
-              console.error("ส่งข้อมูลล้มเหลว: ", error);
-              alert("เกิดข้อผิดพลาดในการบันทึกคะแนน");
-            });
+            // แสดงคำถามช่วงอายุ
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('ageQuestion').style.display = 'block';
           }
         };
         optionsDiv.appendChild(btn);
       });
     }
 
+    // สร้าง userId ถัดไปในรูปแบบ user01, user02,...
+    function generateNewUserId(callback) {
+      const col = db.collection("quizResults");
+      col.orderBy("timestamp", "desc").limit(1).get()
+        .then(snapshot => {
+          if (snapshot.empty) {
+            callback("user01");
+          } else {
+            let lastId = snapshot.docs[0].id; // เช่น user01
+            let num = parseInt(lastId.replace("user", ""), 10);
+            num++;
+            let newId = "user" + num.toString().padStart(2, "0");
+            callback(newId);
+          }
+        })
+        .catch(err => {
+          console.error("Error getting last user id:", err);
+          callback("user01");
+        });
+    }
+
+    // ตรวจสอบ input อายุให้รับได้แค่เลข 1-6
+    const ageInput = document.getElementById("ageInput");
+    ageInput.addEventListener("input", () => {
+      ageInput.value = ageInput.value.replace(/[^1-6]/g, "");
+    });
+
+    function submitAge() {
+      const ageText = ageInput.value.trim();
+      if (!ageText) {
+        alert("กรุณาใส่เลข 1-6 ก่อนส่งข้อมูล");
+        return;
+      }
+
+      generateNewUserId(userId => {
+        const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+        // บันทึก quizResults
+        db.collection("quizResults").doc(userId).set({
+          score: score,
+          total: questions.length,
+          timestamp: timestamp
+        });
+
+        // บันทึก ageResponses
+        db.collection("ageResponses").doc(userId).set({
+          age: ageText,
+          timestamp: timestamp
+        }).then(() => {
+          alert("ส่งข้อมูลเรียบร้อย ขอบคุณครับ!");
+          window.location.href = `home.html?score=${score}`;
+        }).catch(error => {
+          console.error("บันทึกข้อมูลล้มเหลว: ", error);
+          alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+        });
+      });
+    }
+
+    // เริ่มต้นแสดงคำถาม
     showQuestion();
   </script>
 
 </body>
 </html>
+
+
 
 
