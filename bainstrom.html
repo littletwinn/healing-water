@@ -38,12 +38,20 @@
 
     textarea {
       width: 100%;
-      height: 250px;
       font-size: 16px;
       padding: 10px;
-      border-radius: 35px;
+      border-radius: 15px;
       border: 1px solid #ccc;
       resize: none;
+    }
+
+    #idea {
+      height: 250px;
+      margin-bottom: 20px;
+    }
+
+    #age {
+      height: 200px;
     }
 
     button {
@@ -70,23 +78,70 @@
 
     <div class="question">
       <h3>คุณคิดว่าการปล่อยน้ำเสียลงแหล่งธรรมชาติส่งผลอะไรบ้าง?</h3>
-      <textarea name="q0" placeholder="พิมพ์ไอเดียของคุณที่นี่..."></textarea>
+      <textarea name="idea" id="idea" placeholder="พิมพ์ไอเดียของคุณที่นี่..."></textarea>
+    </div>
+
+    <div class="question">
+      <h3>เรทอายุของคุณ (ตัวเลขตามกำหนดด้านล่าง)?</h3>
+      <textarea name="age" id="age" rows="7"></textarea>
     </div>
 
     <button type="button" onclick="goToIdea()">SEND</button>
   </div>
 
-  <script>
-    function goToIdea() {
-      const ideaText = document.querySelector('textarea[name="q0"]').value.trim();
-      if (ideaText !== "") {
-        const q0 = encodeURIComponent(ideaText);
-        window.location.href = `idea.html?q0=${q0}`;
-      } else {
-        alert("กรุณาพิมพ์ไอเดียก่อนส่ง");
+  <!-- Firebase SDK -->
+  <script type="module">
+    //  ใส่ SDK ของ Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+
+    // ใส่ค่าของโปรเจกต์คุณเองที่ได้จาก Firebase Console
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
+      authDomain: "healer-wating.firebaseapp.com",
+      projectId: "healer-wating",
+      storageBucket: "healer-wating.firebasestorage.app",
+      messagingSenderId: "723339403882",
+      appId: "1:723339403882:web:3f23f47a9cedce6e69e013",
+      measurementId: "G-JNCLBF382P"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // กำหนด placeholder เรทอายุ
+    const placeholderText = `กรุณาตอบตามความจริงเพื่อนำไปเก็บข้อมูล
+1 => ต่ำกว่า 12
+2 => 12 - 24
+3 => 25 - 35
+4 => 36 - 50
+5 => 51 - 60
+6 => 60 ขึ้นไป`;
+    document.getElementById("age").placeholder = placeholderText;
+
+    // เมื่อกด SEND
+    window.goToIdea = function () {
+      const ideaText = document.getElementById('idea').value.trim();
+      const ageText = document.getElementById('age').value.trim();
+
+      if (ideaText === "" || ageText === "") {
+        alert("กรุณากรอกทั้งไอเดียและช่วงอายุก่อนส่ง");
+        return;
       }
+
+      // เก็บช่วงอายุเข้า Firebase
+      const ageRef = ref(database, 'ageResponses');
+      push(ageRef, {
+        age: ageText,
+        timestamp: Date.now()
+      });
+
+      // ส่งไอเดียไป idea.html
+      const encodedIdea = encodeURIComponent(ideaText);
+      window.location.href = `idea.html?idea=${encodedIdea}`;
     }
   </script>
 
 </body>
 </html>
+
