@@ -1,233 +1,374 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>น้ำเสีย</title>
-  
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Leelawadee UI';
+<meta charset="UTF-8">
+<title>น้ำเสีย</title>
     
-    }
-
-
-    #bg-video {
+<style>
+  /* สไตล์สำหรับ Website Tour */
+    .tour-overlay {
       position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100vw;
-      min-height: 100vh;
-      z-index: -1;
-      object-fit: cover;
-      opacity: 0.275;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none;
+      backdrop-filter: blur(5px);
     }
 
-    .content-overlay {
-      position: relative;
-      z-index: 1;
-    }
-
-    .navbar {
-      background-color: #FFFDF6;
-      display: flex;
-      justify-content: center;
-      padding: 10px 0;
-    }
-
-    .navbar a {
-      color: black;
-      padding: 14px 20px;
-      text-decoration: none;
-      font-size: 16px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .navbar a:hover {
-      color: grey;
-      border-radius: 5px;
-    }
-
-    .content {
-      padding: 40px;
-      text-align: center;
-    }
-
-    .container {
+    .tour-box {
+      position: absolute;
       background-color: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      height: auto;
-      width: 70%;
-      text-align: center;
-      margin: 40px auto;
-    }
-
-    .container:hover {
-      transform: scale(1.17);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
-
-    .button-link {
-      display: inline-block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      background-color:#a3a380;
-      color: #fff7e4;
-      text-decoration: none;
+      padding: 20px;
       border-radius: 10px;
-      font-size: 14px;
-      text-align: center;
-      width: fit-content;
-      position: fixed;
-      top: -5px;
-      right: 170px;
+      max-width: 300px;
+      z-index: 1003;
+      font-size: 16px;
+      color: black;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      display: none; /* ซ่อนตอนเริ่มต้น */
     }
 
-    .button-link:hover {
-      background-color: #6e6e4f;
-    }
-
-    .circle-button-big {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background-color: #75070c;
-      color: whitesmoke;
-      font-size: 36px;
+    .tour-next-button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #a3a380;
+      color: white;
       border: none;
+      border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 30px auto;
     }
 
-    .circle-button-big:hover {
-      background-color: #aa272e;
-    }
-  </style>
+        #tour-highlight-area {
+            position: absolute;
+            z-index: 1001;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #tour-blur-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            pointer-events: none;
+            display: none;
+            backdrop-filter: blur(6px);
+            -webkit-mask: radial-gradient(circle at var(--highlight-x) var(--highlight-y), transparent 0, transparent 80px, black 100px);
+            mask: radial-gradient(circle at var(--highlight-x) var(--highlight-y), transparent 0, transparent 80px, black 100px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* สไตล์หลักของเว็บไซต์ */
+        body {
+            margin: 0;
+            font-family: 'Leelawadee UI', sans-serif;
+        }
+
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100vw;
+            min-height: 100vh;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.275;
+        }
+
+        .navbar {
+            background-color: #FFFDF6;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar a {
+            color: black;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: grey;
+            border-radius: 5px;
+        }
+
+        .content {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            text-align: center;
+            margin: 40px auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #a3a380;
+            color: #fff7e4;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-link:hover {
+            background-color: #6e6e4f;
+        }
+
+        .utility-buttons {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 999;
+            font-size: 14px;
+        }
+
+        .circle-button-big {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #75070c;
+            color: whitesmoke;
+            font-size: 36px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+        }
+
+        .circle-button-big:hover {
+            background-color: #aa272e;
+        }
+
+        #introMessage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #7e2625;
+            padding: 30px 60px;
+            font-size: 50px;
+            font-weight: bold;
+            z-index: 9999;
+            text-align: center;
+        }
+
+        .source {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* เพิ่มสไตล์สำหรับ backdrop blur ที่ครอบคลุมทั้งหน้า */
+        .full-screen-blur {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            backdrop-filter: blur(8px);
+        }
+    </style>
 </head>
 <body>
 
-  <!-- พื้นหลังวิดีโอ -->
-  <video autoplay muted loop id="bg-video">
-    <source src="water.mp4" type="video/mp4">
-  </video>
+    <video autoplay muted loop id="bg-video">
+        <source src="water.mp4" type="video/mp4">
+    </video>
 
-  <!-- แถบนำทาง -->
-  <div class="navbar">
-    <a href="home.html">HOME</a>
-    <a href="cause.html">CAUSE</a>
-    <a href="howto.html">HOW TO</a>
-    <a href="place.html">PLACE</a>
-    <a href="idea.html">IDEA BOX</a>
-    <a href="contact.html">CONTACT</a>
-    
-  </div>
+    <div id="tour-blur-overlay"></div>
+    <div id="tour-highlight-area"></div>
+    <div id="tour-box" class="tour-box">
+        <div id="tour-text"></div>
+        <button class="tour-next-button" onclick="nextTourStep()">ถัดไป</button>
+    </div>
+
+    <div id="introMessage">Website Guide</div>
+
+    <div class="navbar">
+        <a href="home.html" data-tour-step="1">HOME</a>
+        <a href="cause.html" data-tour-step="2">CAUSE</a>
+        <a href="howto.html" data-tour-step="3">HOW TO</a>
+        <a href="place.html" data-tour-step="4">PLACE</a>
+        <a href="idea.html">IDEA BOX</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
+
+    <div class="utility-buttons">
+        <a href="quiz.html" class="button-link" data-tour-step="5">POST-TEST</a>
+        <a href="https://wordwall.net/th/resource/95305486/เกมจบค-นำเสียจากแหล่งต่าง-ๆ" 
+        target="_blank" 
+        class="button-link">
+        GAME TIME!
+        </a>
+    </div>
+
+    <div class="content">
+        <h1 style="color: #380c0d; font-size: 70px;">WELCOME!</h1>
+        <h2 style="color: #514e2d;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
+        <p id="scoreDisplay" style="color:red; font-size: 24px;"></p>
+
+        <button class="circle-button-big" onclick="scrollToSection()">&#x2193;</button>
+    </div>
+
+    <div class="container">
+        <h2 style="color: #75070c;">ลักษณะของน้ำเสีย</h2>
+        <p style="color: black;">
+            น้ำเสียประกอบด้วยของแข็งและสารเคมีหลากหลายชนิด 
+            โดยของแข็งในน้ำเสียมีทั้งที่ตกตะกอนได้ แขวนลอย และละลายน้ำ 
+            ซึ่งมักเป็นสารอินทรีย์ที่ย่อยสลายช้า ทำให้น้ำขุ่น เกิดตะกอน ตื้นเขิน 
+            และขาดออกซิเจนส่งผลต่อสิ่งมีชีวิตในน้ำ ด้านเคมี น้ำเสียมีสารอินทรีย์ 
+            เช่น คาร์โบไฮเดรต โปรตีน ไขมัน ที่จุลินทรีย์ใช้ย่อยทำให้เกิดกลิ่นเหม็น 
+            และวัดด้วยค่าบีโอดี (BOD) สารอนินทรีย์ เช่น คลอไรด์ ไนโตรเจน ฟอสฟอรัส 
+            และโลหะหนักอาจปนเปื้อนจากอุตสาหกรรมในบ้าน นอกจากนี้ยังมีน้ำมัน ไขมัน สารซักฟอก 
+            และธาตุอาหารที่ทำให้เกิดสาหร่ายบลูมและลดออกซิเจนในน้ำ 
+            กำมะถันในของเสียสามารถเปลี่ยนเป็นก๊าซไข่เน่า (H₂S) ในสภาวะไร้อากาศ 
+            ส่งกลิ่นเหม็นในระบบบำบัดน้ำเสียแบบไม่ใช้อากาศ
+        </p>
+        <img src="Picwastewater.jpg" alt="ตัวอย่างน้ำเสีย" style="max-width: 600px; height: auto;  margin-top: 20px;"/>
+        <div class="source">ที่มา: https://www.bangphralocal.go.th/news/info/content/295</div>
+    </div>
+
+    <div class="container">
+        <h2 style="color: #75070c;">📣NEW UPDATE!</h2>
+        <h3 style="color: black; text-decoration: underline;">
+            <a href="https://mgronline.com/local/detail/9680000041214" target="_blank" style="color: black; text-decoration: underline;">
+                ลักลอบทิ้งน้ำเสียที่มาบตาพุด
+            </a>
+        </h3>
+        <p><strong>🗓️ วันที่เกิดเหตุ:</strong> 23 มิถุนายน 2568</p>
+        <p><strong>📍 สถานที่:</strong> หมู่ 1 ตำบลมาบยางพร อำเภอปลวกแดง จังหวัดระยอง</p>
+        <p>
+            ชาวบ้านพบรถบรรทุกลักลอบทิ้งน้ำเสียลงคลองสาธารณะ ส่งผลให้น้ำมีสีขุ่นและมีกลิ่นเหม็นรุนแรง 
+            พร้อมพบปลาตายจำนวนมากในบริเวณดังกล่าว ชาวบ้านจึงร่วมมือกับเจ้าหน้าที่ อบต. และตำรวจ 
+            เข้าจับกุมผู้กระทำผิดทันที
+        </p>
+        <p>
+            เบื้องต้นพบว่าเป็นน้ำเสียจากกิจกรรมอุตสาหกรรม โดยไม่ได้ผ่านการบำบัดอย่างถูกต้อง 
+            เจ้าหน้าที่กำลังเร่งตรวจสอบที่มา และสั่งให้โรงงานเร่งปรับปรุงระบบบำบัดน้ำเสียให้ได้มาตรฐาน
+        </p>
+        <p><strong>⚠️ ผลกระทบ:</strong> น้ำเน่าเสีย, กลิ่นเหม็น, สัตว์น้ำตาย, ชาวบ้านได้รับผลกระทบด้านสุขภาพและคุณภาพชีวิต</p>
+        <p><strong>✅ การตอบสนอง:</strong> จับกุมผู้กระทำผิด ตรวจสอบแหล่งที่มา และกำชับโรงงานให้แก้ไขทันที</p>
+        <img src="PicNEWS" alt="ตัวอย่างข่าว" style="max-width: 600px; height: auto;  margin-top: 20px;"/>
+    </div>
+
+    <script>
+        const tourSteps = [
+            {
+                element: document.querySelector('[data-tour-step="1"]'),
+                text: ""
+            },
+            {
+                element: document.querySelector('[data-tour-step="2"]'),
+                text: "สาเหตุของน้ำเสีย"
+            },
+            {
+                element: document.querySelector('[data-tour-step="3"]'),
+                text: "วิธีการบำบัดน้ำเสียที่ถูกต้อง"
+            },
+            {
+                element: document.querySelector('[data-tour-step="4"]'),
+                text: "สถานที่ที่เกี่ยวข้องกับการบำบัดน้ำเสีย"
+            },
+            {
+                element: document.querySelector('[data-tour-step="5"]'),
+                text: "อย่าลืมกลับมาทำกันด้วยนะ"
+            }
+        ];
+
+        let currentStep = -1;
+
+        function startTour() {
+            const introMessage = document.getElementById("introMessage");
+            const fullScreenBlur = document.createElement('div');
+            fullScreenBlur.classList.add('full-screen-blur');
+            document.body.appendChild(fullScreenBlur);
+
+            // ซ่อนข้อความแนะนำหลัง 3 วินาที
+            setTimeout(() => {
+                introMessage.style.display = "none";
+                fullScreenBlur.remove(); // ลบ blur ทั้งหน้าออก
+                document.getElementById("tour-box").style.display = "block";
+                document.getElementById("tour-blur-overlay").style.display = "block";
+                nextTourStep();
+            }, 3000);
+        }
+
+        function nextTourStep() {
+            currentStep++;
+
+            if (currentStep >= tourSteps.length) {
+                document.getElementById("tour-blur-overlay").style.display = "none";
+                document.getElementById("tour-box").style.display = "none";
+                return;
+            }
+
+            const step = tourSteps[currentStep];
+            const rect = step.element.getBoundingClientRect();
+            
+            // คำนวณตำแหน่งและขนาด
+            const centerX = rect.left + rect.width / 2 + window.scrollX;
+            const centerY = rect.top + rect.height / 2 + window.scrollY;
+            const radius = Math.max(rect.width, rect.height) / 2 + 30;
+
+            // อัปเดตตำแหน่งสำหรับ CSS variable
+            document.documentElement.style.setProperty('--highlight-x', `${centerX}px`);
+            document.documentElement.style.setProperty('--highlight-y', `${centerY}px`);
+
+            // อัปเดตตำแหน่งของกล่องข้อความ
+            const box = document.getElementById("tour-box");
+            box.style.top = `${rect.bottom + window.scrollY + 15}px`;
+            box.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
+            box.style.transform = "translateX(-50%)";
+
+            document.getElementById("tour-text").textContent = step.text;
+
+            // ตรวจสอบว่าต้องเลื่อนหน้าจอหรือไม่
+            step.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // เริ่มต้นการแนะนำเว็บไซต์เมื่อหน้าเว็บโหลดเสร็จ
+        window.addEventListener("load", startTour);
+
+        // ฟังก์ชันสำหรับปุ่มเลื่อนลง
+        function scrollToSection() {
+            const container = document.querySelector('.container');
+            if (container) {
+                container.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
 
 
-  <!-- ปุ่ม POST-TEST และ Wordwall -->
-<div style="position: fixed; top: -5px; right: 150px; display: flex; gap: 15px; z-index: 999; font-size: 14px;">
-  <a href="quiz.html" class="button-link" style="position: static;">POST-TEST</a>
-
-  <a href="https://wordwall.net/th/resource/95305486/เกมจบค-นำเสียจากแหล่งต่าง-ๆ" 
-    target="_blank" 
-    class="button-link" 
-    style="top: -5px; right: 20px;">
-    GAME TIME!
-  </a>
-</div>
-
-
-
-
-  <!-- เนื้อหาหลัก -->
-  <div class="content">
-    <h1 style="color: #380c0d; font-size: 70px;">WELCOME!</h1>
-    <h2 style="color: #514e2d;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
-    <p id="scoreDisplay" style="color:red; font-size: 24px;"></p>
-
-    <!-- ปุ่มลูกศรลง -->
-    <button class="circle-button-big" onclick="scrollToSection()">&#x2193;</button>
-  </div>
-
-  <!-- กล่องเนื้อหา -->
-  <div class="container">
-    <h2 style="color: #75070c;">ลักษณะของน้ำเสีย</h2>
-    <p style="color: black;">
-      น้ำเสียประกอบด้วยของแข็งและสารเคมีหลากหลายชนิด 
-      โดยของแข็งในน้ำเสียมีทั้งที่ตกตะกอนได้ แขวนลอย และละลายน้ำ 
-      ซึ่งมักเป็นสารอินทรีย์ที่ย่อยสลายช้า ทำให้น้ำขุ่น เกิดตะกอน ตื้นเขิน 
-      และขาดออกซิเจนส่งผลต่อสิ่งมีชีวิตในน้ำ ด้านเคมี น้ำเสียมีสารอินทรีย์ 
-      เช่น คาร์โบไฮเดรต โปรตีน ไขมัน ที่จุลินทรีย์ใช้ย่อยทำให้เกิดกลิ่นเหม็น 
-      และวัดด้วยค่าบีโอดี (BOD) สารอนินทรีย์ เช่น คลอไรด์ ไนโตรเจน ฟอสฟอรัส 
-      และโลหะหนักอาจปนเปื้อนจากอุตสาหกรรมในบ้าน นอกจากนี้ยังมีน้ำมัน ไขมัน สารซักฟอก 
-      และธาตุอาหารที่ทำให้เกิดสาหร่ายบลูมและลดออกซิเจนในน้ำ 
-      กำมะถันในของเสียสามารถเปลี่ยนเป็นก๊าซไข่เน่า (H₂S) ในสภาวะไร้อากาศ 
-      ส่งกลิ่นเหม็นในระบบบำบัดน้ำเสียแบบไม่ใช้อากาศ
-    </p>
-    <img src="Picwastewater.jpg" alt="ตัวอย่างน้ำเสีย" style="max-width: 600px; height: auto;  margin-top: 20px;"/>
-    <div class="source">ที่มา: https://www.bangphralocal.go.th/news/info/content/295</div>
-  </div>
-
-  <div class="container">
-  <h2 style="color: #75070c;">📣NEW UPDATE!</h2>
-  <h3 style="color: black; text-decoration: underline;">
-    <a href="https://mgronline.com/local/detail/9680000041214" target="_blank" style="color: black; text-decoration: underline;">
-      ลักลอบทิ้งน้ำเสียที่มาบตาพุด
-    </a>
-  </h3>
-  
-  <p ><strong>🗓️ วันที่เกิดเหตุ:</strong> 23 มิถุนายน 2568</p>
-  <p><strong>📍 สถานที่:</strong> หมู่ 1 ตำบลมาบยางพร อำเภอปลวกแดง จังหวัดระยอง</p>
-
-  <p>
-    ชาวบ้านพบรถบรรทุกลักลอบทิ้งน้ำเสียลงคลองสาธารณะ ส่งผลให้น้ำมีสีขุ่นและมีกลิ่นเหม็นรุนแรง 
-    พร้อมพบปลาตายจำนวนมากในบริเวณดังกล่าว ชาวบ้านจึงร่วมมือกับเจ้าหน้าที่ อบต. และตำรวจ 
-    เข้าจับกุมผู้กระทำผิดทันที
-  </p>
-
-  <p>
-    เบื้องต้นพบว่าเป็นน้ำเสียจากกิจกรรมอุตสาหกรรม โดยไม่ได้ผ่านการบำบัดอย่างถูกต้อง 
-    เจ้าหน้าที่กำลังเร่งตรวจสอบที่มา และสั่งให้โรงงานเร่งปรับปรุงระบบบำบัดน้ำเสียให้ได้มาตรฐาน
-  </p>
-
-  <p><strong>⚠️ ผลกระทบ:</strong> น้ำเน่าเสีย, กลิ่นเหม็น, สัตว์น้ำตาย, ชาวบ้านได้รับผลกระทบด้านสุขภาพและคุณภาพชีวิต</p>
-
-  <p><strong>✅ การตอบสนอง:</strong> จับกุมผู้กระทำผิด ตรวจสอบแหล่งที่มา และกำชับโรงงานให้แก้ไขทันที</p>
-  <img src="PicNEWS" alt="ตัวอย่างข่าว" style="max-width: 600px; height: auto;  margin-top: 20px;"/>
-</div>
-
-
-
- 
-
-  <!-- สคริปต์ -->
-  <script>
-    function scrollToSection() {
-      document.querySelector(".container").scrollIntoView({ behavior: "smooth" });
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const score = urlParams.get('score');
-    if (score !== null) {
-      document.getElementById("scoreDisplay").textContent = `คุณได้คะแนน ${score} จาก 5`;
-    }
-  </script>
-
-  <!-- อ้างอิง -->
-  <div style="background-color: #e0f7fa; color: #685b5b; text-align: left; padding: 10px 0; font-size: 12px; margin-top: 40px;">
-  <h3 style="margin: 10px 30px;"> อ้างอิง : </h3>
-  <p style="margin: 10px 30px;">กรมควบคุมมลพิษ. (2566). รายงานสถานการณ์มลพิษของประเทศไทย ปี พ.ศ. 2565. https://www.pcd.go.th/publication/4551/ </p>
-  <p style="margin: 10px 30px;">กรมประชาสัมพันธ์. (2568, 23 มิถุนายน). ลักลอบทิ้งน้ำเสียที่มาบตาพุด จ.ระยอง. https://mgronline.com/local/detail/9680000041214 </p>
-</div>
-
-
+    <div style="background-color: #e0f7fa; color: #685b5b; text-align: left; padding: 10px 0; font-size: 12px; margin-top: 40px;">
+        <h3 style="margin: 10px 30px;"> อ้างอิง : </h3>
+        <p style="margin: 10px 30px;">กรมควบคุมมลพิษ. (2566). รายงานสถานการณ์มลพิษของประเทศไทย ปี พ.ศ. 2565. https://www.pcd.go.th/publication/4551/ </p>
+        <p style="margin: 10px 30px;">กรมประชาสัมพันธ์. (2568, 23 มิถุนายน). ลักลอบทิ้งน้ำเสียที่มาบตาพุด จ.ระยอง. https://mgronline.com/local/detail/9680000041214 </p>
+    </div>
 
 </body>
 </html>

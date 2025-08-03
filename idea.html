@@ -38,27 +38,26 @@
       margin-bottom: 20px;
     }
 
-    /* container ไอเดียเป็น flex แนวนอน wrap ได้ */
     #ideaList {
-      display: flex;
-      flex-wrap: wrap;       /* ให้ขึ้นบรรทัดใหม่เมื่อไม่พอ */
-      justify-content: center;
-      gap: 20px;             /* ช่องว่างระหว่างกล่อง */
-      padding: 20px;
-      max-width: 900px;      /* กำหนดความกว้างสูงสุดเพื่อจัดแนวกลาง */
-      box-sizing: border-box;
-      width: 100%;
-    }
+  column-count: 3;            /* ปรับจำนวนคอลัมน์ที่ต้องการ */
+  column-gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  box-sizing: border-box;
+  width: 100%;
+}
 
-    .box {
-      background-color: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 250px;          /* กำหนดความกว้างกล่อง */
-      box-sizing: border-box;
-    }
+.box {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
   </style>
 
   <!-- Firebase SDKs -->
@@ -76,7 +75,9 @@
     <a href="contact.html">CONTACT</a>
   </div>
 
-  <h2>💡 ไอเดียจากคุณ</h2>
+  <h2>💡IDEA </h2>
+  <h3>Please Back To Homepage</h3>
+  
   <div id="ideaList"></div>
 
   <script>

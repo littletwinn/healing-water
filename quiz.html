@@ -88,6 +88,17 @@
       text-align: center;
     }
 
+    textarea {
+      margin-top: 20px;
+      font-size: 16px;
+      width: 100%;
+      height: 140px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+
     button {
       padding: 10px 20px;
       margin-top: 20px;
@@ -107,7 +118,6 @@
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
 </head>
 <body>
 
@@ -122,14 +132,15 @@
   <div id="ageQuestion">
     <div class="question">กรุณาใส่ช่วงอายุของคุณ (1-6)</div>
     <input id="ageInput" type="text" maxlength="1" placeholder="1-6" />
-    <textarea id="ageInput" rows="7" placeholder="กรุณาตอบตามความจริง
-      1 => ต่ำกว่า 12
-      2 => 12 - 24
-      3 => 25 - 35
-      4 => 36 - 50
-      5 => 51 - 60
-      6 => 60 ขึ้นไป"></textarea>
-    
+    <textarea disabled>
+กรุณาตอบตามความจริง
+1 => ต่ำกว่า 12
+2 => 12 - 24
+3 => 25 - 35
+4 => 36 - 50
+5 => 51 - 60
+6 => 60 ขึ้นไป
+    </textarea>
     <br>
     <button onclick="submitAge()">ส่งข้อมูล</button>
   </div>
@@ -149,7 +160,10 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // คำถามแบบปรนัย 5 ข้อ
+    let currentQuestion = 0;
+    let score = 0;
+    let isSubmitted = false;
+
     const questions = [
       {
         question: "การบำบัดน้ำเสียมีความสำคัญอย่างไร?",
@@ -203,10 +217,6 @@
       }
     ];
 
-    let currentQuestion = 0;
-    let score = 0;
-
-    // ฟังก์ชันแสดงคำถาม
     function showQuestion() {
       const q = questions[currentQuestion];
       document.getElementById('question').textContent = q.question;
@@ -226,7 +236,6 @@
           if (currentQuestion < questions.length) {
             showQuestion();
           } else {
-            // แสดงคำถามช่วงอายุ
             document.getElementById('quizContainer').style.display = 'none';
             document.getElementById('ageQuestion').style.display = 'block';
           }
@@ -235,7 +244,6 @@
       });
     }
 
-    // สร้าง userId ถัดไปในรูปแบบ user01, user02,...
     function generateNewUserId(callback) {
       const col = db.collection("quizResults");
       col.orderBy("timestamp", "desc").limit(1).get()
@@ -243,7 +251,7 @@
           if (snapshot.empty) {
             callback("user01");
           } else {
-            let lastId = snapshot.docs[0].id; // เช่น user01
+            let lastId = snapshot.docs[0].id;
             let num = parseInt(lastId.replace("user", ""), 10);
             num++;
             let newId = "user" + num.toString().padStart(2, "0");
@@ -256,7 +264,6 @@
         });
     }
 
-    // ตรวจสอบ input อายุให้รับได้แค่เลข 1-6
     const ageInput = document.getElementById("ageInput");
     ageInput.addEventListener("input", () => {
       ageInput.value = ageInput.value.replace(/[^1-6]/g, "");
@@ -272,18 +279,17 @@
       generateNewUserId(userId => {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
-        // บันทึก quizResults
         db.collection("quizResults").doc(userId).set({
           score: score,
           total: questions.length,
           timestamp: timestamp
         });
 
-        // บันทึก ageResponses
         db.collection("ageResponses").doc(userId).set({
           age: ageText,
           timestamp: timestamp
         }).then(() => {
+          isSubmitted = true;
           alert("ส่งข้อมูลเรียบร้อย ขอบคุณครับ!");
           window.location.href = `home.html?score=${score}`;
         }).catch(error => {
@@ -293,7 +299,13 @@
       });
     }
 
-    // เริ่มต้นแสดงคำถาม
+    // ป้องกันออกโดยไม่ได้ส่ง
+    window.onbeforeunload = function () {
+      if (!isSubmitted) {
+        return "คุณยังไม่ได้ส่งแบบทดสอบ POST-TEST! แน่ใจหรือว่าจะออก?";
+      }
+    };
+
     showQuestion();
   </script>
 
