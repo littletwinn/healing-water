@@ -127,22 +127,6 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.button-link {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #a3a380;
-    color: #fff7e4;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 14px;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.button-link:hover {
-    background-color: #6e6e4f;
-}
-
 .utility-buttons {
     position: fixed;
     top: 10px;
@@ -151,6 +135,29 @@ body {
     gap: 15px;
     z-index: 999;
     font-size: 14px;
+}
+
+/* สไตล์ใหม่สำหรับปุ่ม POST-TEST */
+#post-test-button {
+    display: block;
+    width: 250px;
+    padding: 15px 30px;
+    background-color: #0b5394;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 50px auto;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#post-test-button:hover {
+    background-color: #0c3453;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 .circle-button-big {
@@ -279,15 +286,12 @@ body {
     <a href="contact.html">CONTACT</a>
 </div>
 
-<div class="utility-buttons">
-    <a href="quiz.html" class="button-link" data-tour-step="5">POST-TEST</a>
-    <a href="https://wordwall.net/th/resource/95305486/เกมจบค-นำเสียจากแหล่งต่าง-ๆ" target="_blank" class="button-link">GAME TIME</a>
-</div>
-
 <div class="content">
     <h1 style="color: #380c0d; font-size: 70px;">WELCOME!</h1>
     <h2 style="color: #514e2d;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
     <p id="scoreDisplay"></p>
+
+    <a href="quiz.html" id="post-test-button" data-tour-step="5">POST-TEST</a>
 
     <button class="circle-button-big" onclick="scrollToSection()">&#x2193;</button>
 </div>
@@ -316,6 +320,7 @@ body {
         <a href="https://mgronline.com/local/detail/9680000041214" target="_blank" style="color: black; text-decoration: underline;">
             ลักลอบทิ้งน้ำเสียที่มาบตาพุด
         </a>
+    </a>
     </h3>
     <p><strong>🗓️ วันที่เกิดเหตุ:</strong> 23 มิถุนายน 2568</p>
     <p><strong>📍 สถานที่:</strong> หมู่ 1 ตำบลมาบยางพร อำเภอปลวกแดง จังหวัดระยอง</p>
@@ -401,7 +406,8 @@ document.addEventListener("DOMContentLoaded", () => {
         { element: document.querySelector('[data-tour-step="2"]'), text: "สาเหตุของน้ำเสีย" },
         { element: document.querySelector('[data-tour-step="3"]'), text: "วิธีการบำบัดน้ำเสียที่ถูกต้อง" },
         { element: document.querySelector('[data-tour-step="4"]'), text: "สถานที่ที่เกี่ยวข้องกับการบำบัดน้ำเสีย" },
-        { element: document.querySelector('[data-tour-step="5"]'), text: "อย่าลืมกลับมาทำกันด้วยนะ" }
+        // อัปเดต Website Tour ให้ชี้ไปที่ปุ่ม POST-TEST ที่ถูกย้าย
+        { element: document.getElementById('post-test-button'), text: "อย่าลืมกลับมาทำกันด้วยนะ" }
     ];
 
     let currentStep = -1;
