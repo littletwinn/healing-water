@@ -175,58 +175,70 @@ body {
 }
 
 #introMessage {
-  position: fixed;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ffffff;
-  padding: 30px 60px;
-  z-index: 9999;
-  text-align: center;
-  display: block;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    padding: 30px 60px;
+    z-index: 9999;
+    text-align: center;
+    display: block;
 }
 
 .typing {
-  border-right: 2px solid white;
-  animation: blink-caret 0.7s step-end infinite;
-  white-space: pre-wrap;
+    border-right: 2px solid white;
+    animation: blink-caret 0.3s step-end infinite;
+    white-space: pre-wrap;
 }
 
 .large-text {
-  font-size: 45px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: #380c0d;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1.4;
+    color: #380c0d;
 }
 
 .small-text {
-  font-size: 30px;
-  margin-top: 20px;
-  color: #380c0d;
+    font-size: 30px;
+    margin-top: 20px;
+    color: #380c0d;
 }
 
 @keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: white; }
+    from, to { border-color: transparent; }
+    50% { border-color: white; }
 }
 
 
 .tour-skip-button {
-  margin-left: 8px;
-  padding: 8px 16px;
-  background-color: #e57373;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    margin-left: 8px;
+    padding: 8px 16px;
+    background-color: #e57373;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .tour-skip-button:hover {
-  background-color: #d32f2f;
+    background-color: #d32f2f;
 }
 
+.hide {
+    display: none;
+}
+
+#skipBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
 .source {
     margin-top: 15px;
@@ -234,7 +246,12 @@ body {
     color: #888;
 }
 
-
+#scoreDisplay {
+    color: #e53935;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
 </style>
 </head>
 <body>
@@ -264,17 +281,13 @@ body {
 
 <div class="utility-buttons">
     <a href="quiz.html" class="button-link" data-tour-step="5">POST-TEST</a>
-    <a href="https://wordwall.net/th/resource/95305486/เกมจบค-นำเสียจากแหล่งต่าง-ๆ" 
-    target="_blank" 
-    class="button-link">
-    GAME TIME!
-    </a>
+    <a href="https://wordwall.net/th/resource/95305486/เกมจบค-นำเสียจากแหล่งต่าง-ๆ" target="_blank" class="button-link">GAME TIME</a>
 </div>
 
 <div class="content">
     <h1 style="color: #380c0d; font-size: 70px;">WELCOME!</h1>
     <h2 style="color: #514e2d;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
-    <p id="scoreDisplay" style="color:red; font-size: 24px;"></p>
+    <p id="scoreDisplay"></p>
 
     <button class="circle-button-big" onclick="scrollToSection()">&#x2193;</button>
 </div>
@@ -320,8 +333,8 @@ body {
     <img src="PicNEWS" alt="ตัวอย่างข่าว" style="max-width: 600px; height: auto; "/>
 </div>
 <div id="introMessage">
-  <div id="line1" class="typing large-text"></div>
-  <div id="line2" class="typing small-text"></div>
+    <div id="line1" class="typing large-text"></div>
+    <div id="line2" class="typing small-text"></div>
 </div>
 
 
@@ -334,22 +347,37 @@ body {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const introBlurOverlay = document.getElementById("intro-blur-overlay");
+    const introMessage = document.getElementById("introMessage");
     const line1Text = "ヅ𝙃𝙤𝙥𝙚 𝙐 𝙀𝙣𝙟𝙤𝙮𝙚𝙙!";
-    const line2Text = "𝘯𝘦𝘹𝘵, 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘰𝘶𝘳 𝘸𝘦𝘣𝘴𝘪𝘵𝘦 𝘨𝘶𝘪𝘥𝘦";
+    const line2Text = "𝘯𝘦𝘹𝘵, 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘰𝘶𝘳 𝘸𝘦𝘣𝘴𝘪𝘵𝘦 𝐠𝐮𝐢𝐝𝐞";
 
     const line1El = document.getElementById("line1");
     const line2El = document.getElementById("line2");
+    
+    // สร้างปุ่มกด "ข้าม" ที่แสดงทันที
+    const skipBtn = document.createElement("button");
+    skipBtn.id = "skipBtn";
+    skipBtn.textContent = "ข้าม";
+    introMessage.appendChild(skipBtn);
 
     let index1 = 0;
     let index2 = 0;
+    let typingTimer; // เก็บค่า timer ของ setTimeout
+
+    function hideIntro() {
+        // ฟังก์ชันนี้จะทำงานเมื่อปุ่ม "ข้าม" ถูกกด
+        clearTimeout(typingTimer); // หยุดการพิมพ์ทันที
+        introMessage.style.display = "none";
+        introBlurOverlay.style.display = "none";
+    }
 
     function typeLine1() {
         if (index1 < line1Text.length) {
             line1El.innerHTML += line1Text.charAt(index1);
             index1++;
-            setTimeout(typeLine1, 80);
+            typingTimer = setTimeout(typeLine1, 55);
         } else {
-            setTimeout(typeLine2, 600);
+            typeLine2();
         }
     }
 
@@ -357,20 +385,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (index2 < line2Text.length) {
             line2El.innerHTML += line2Text.charAt(index2);
             index2++;
-            setTimeout(typeLine2, 80);
+            typingTimer = setTimeout(typeLine2, 60);
         } else {
-            setTimeout(() => {
-                document.getElementById("introMessage").style.display = "none";
-                introBlurOverlay.style.display = "none";  // ซ่อนเบลอเมื่อจบ
-                startTour();  // เริ่ม Website Guide ต่อทันที
-            }, 2500);
+            line2El.classList.remove("typing");
         }
     }
 
-    // เริ่มพิมพ์ทันทีหลังโหลด
+    // เริ่มพิมพ์และผูก event ปุ่มข้ามทันที
     typeLine1();
+    skipBtn.addEventListener("click", hideIntro);
 
-    // ตัวแปรและฟังก์ชันสำหรับ Website Tour
+    // ส่วนของ Website Tour
     const tourSteps = [
         { element: document.querySelector('[data-tour-step="1"]'), text: "หน้าหลัก" },
         { element: document.querySelector('[data-tour-step="2"]'), text: "สาเหตุของน้ำเสีย" },
@@ -423,20 +448,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ผูก event ปุ่มถัดไป
     tourNextButton.addEventListener("click", nextTourStep);
 
-    // ผูก event ปุ่มข้าม
     tourSkipButton.addEventListener("click", () => {
-        tourBox.style.display = "none";         // ซ่อนกล่องทัวร์
-        tourBlurOverlay.style.display = "none"; // ซ่อนพื้นหลังเบลอ
-        // เคลียร์ตำแหน่งวงกลมไฮไลต์ (ถ้ามี)
+        tourBox.style.display = "none";
+        tourBlurOverlay.style.display = "none";
         document.documentElement.style.removeProperty('--highlight-x');
         document.documentElement.style.removeProperty('--highlight-y');
     });
 
-    // ผูก event ปุ่มเลื่อนลง
     document.querySelector(".circle-button-big").addEventListener("click", scrollToSection);
+
+    // ส่วนสำหรับแสดงคะแนนจาก quiz.html
+    const params = new URLSearchParams(window.location.search);
+    const score = params.get("score");
+    if (score) {
+        document.getElementById("scoreDisplay").textContent = `คะแนน POST-TEST ของคุณคือ: ${score} / 5`;
+    }
 });
 </script>
 

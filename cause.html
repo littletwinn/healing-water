@@ -72,6 +72,33 @@
       background-color: #fff3e5;
       color: #4f6815;
     }
+
+    
+    .button-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #a3a380;
+      color: #fff7e4;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 14px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-link:hover {
+      background-color: #6e6e4f;
+    }
+
+    .utility-buttons {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 999;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -84,6 +111,10 @@
     <a href="place.html">PLACE</a>
     <a href="idea.html">IDEA BOX</a>
     <a href="contact.html">CONTACT</a>
+  </div>
+
+  <div class="utility-buttons">
+    <a href="quiz.html" class="button-link" data-tour-step="5">POST-TEST</a>
   </div>
 
   <!-- กล่องเนื้อหา 1 -->
