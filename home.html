@@ -320,7 +320,6 @@ body {
         <a href="https://mgronline.com/local/detail/9680000041214" target="_blank" style="color: black; text-decoration: underline;">
             ลักลอบทิ้งน้ำเสียที่มาบตาพุด
         </a>
-    </a>
     </h3>
     <p><strong>🗓️ วันที่เกิดเหตุ:</strong> 23 มิถุนายน 2568</p>
     <p><strong>📍 สถานที่:</strong> หมู่ 1 ตำบลมาบยางพร อำเภอปลวกแดง จังหวัดระยอง</p>
@@ -370,7 +369,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let typingTimer; // เก็บค่า timer ของ setTimeout
 
     function hideIntro() {
-        // ฟังก์ชันนี้จะทำงานเมื่อปุ่ม "ข้าม" ถูกกด
         clearTimeout(typingTimer); // หยุดการพิมพ์ทันที
         introMessage.style.display = "none";
         introBlurOverlay.style.display = "none";
@@ -382,6 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
             index1++;
             typingTimer = setTimeout(typeLine1, 55);
         } else {
+            line1El.classList.remove("typing");
             typeLine2();
         }
     }
@@ -393,12 +392,24 @@ document.addEventListener("DOMContentLoaded", () => {
             typingTimer = setTimeout(typeLine2, 60);
         } else {
             line2El.classList.remove("typing");
+            // เมื่อพิมพ์ข้อความเสร็จสิ้น ให้ Website Tour เริ่มทำงาน
+            introMessage.style.display = "none";
+            introBlurOverlay.style.display = "none";
+            startTour();
         }
     }
 
     // เริ่มพิมพ์และผูก event ปุ่มข้ามทันที
     typeLine1();
-    skipBtn.addEventListener("click", hideIntro);
+    skipBtn.addEventListener("click", () => {
+        hideIntro();
+        // หน่วงเวลา 1.5 วินาที ก่อนเริ่ม Tour เมื่อกดข้าม
+        setTimeout(() => {
+            startTour();
+        }, 1500); // 1500 มิลลิวินาที = 1.5 วินาที
+    });
+
+
 
     // ส่วนของ Website Tour
     const tourSteps = [
@@ -406,7 +417,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { element: document.querySelector('[data-tour-step="2"]'), text: "สาเหตุของน้ำเสีย" },
         { element: document.querySelector('[data-tour-step="3"]'), text: "วิธีการบำบัดน้ำเสียที่ถูกต้อง" },
         { element: document.querySelector('[data-tour-step="4"]'), text: "สถานที่ที่เกี่ยวข้องกับการบำบัดน้ำเสีย" },
-        // อัปเดต Website Tour ให้ชี้ไปที่ปุ่ม POST-TEST ที่ถูกย้าย
         { element: document.getElementById('post-test-button'), text: "อย่าลืมกลับมาทำกันด้วยนะ" }
     ];
 
