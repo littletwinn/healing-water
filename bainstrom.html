@@ -3,31 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <title>WELCOME</title>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <style>
     body {
-      font-family: 'Leelawadee UI';
+      font-family: 'Leelawadee UI', sans-serif;
       background-color: #4f6815;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       margin: 0;
+      padding: 20px;
     }
 
     .container {
-      background-color: white;
+      max-width: 600px;
+      background: #fff;
       padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 500px;
     }
 
     h2 {
       color: #75070c;
       text-align: center;
+      margin-bottom: 20px;
     }
 
     .question h3 {
@@ -64,32 +69,49 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <h2>-⭒BRAINSTORM TIME!</h2>
-
     <div class="question">
       <h3>คุณคิดว่าการปล่อยน้ำเสียลงแหล่งธรรมชาติส่งผลอะไรบ้าง?</h3>
-      <textarea name="q0" placeholder="พิมพ์ไอเดียของคุณที่นี่..."></textarea>
+      <textarea id="q0" placeholder="พิมพ์ไอเดียของคุณที่นี่..."></textarea>
     </div>
-
-
-
-    <button type="button" onclick="goToIdea()">SEND</button>
+    <button onclick="sendIdea()">SEND</button>
   </div>
 
   <script>
-    function goToIdea() {
-      const ideaText = document.querySelector('textarea[name="q0"]').value.trim();
-      if (ideaText !== "") {
-        const q0 = encodeURIComponent(ideaText);
-        window.location.href = `idea.html?q0=${q0}`;
-      } else {
+    // Firebase config ของคุณ
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
+      authDomain: "healer-wating.firebaseapp.com",
+      projectId: "healer-wating",
+      storageBucket: "healer-wating.appspot.com",
+      messagingSenderId: "723339403882",
+      appId: "1:723339403882:web:3f23f47a9cedce6e69e013",
+      measurementId: "G-JNCLBF382P"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function sendIdea() {
+      const ideaText = document.getElementById('q0').value.trim();
+      if (!ideaText) {
         alert("กรุณาพิมพ์ไอเดียก่อนส่ง");
+        return;
       }
+
+      // บันทึกไอเดียไป Firestore
+      db.collection("ideas").add({
+        text: ideaText,
+        createdAt: firebase.firestore.Timestamp.fromDate(new Date())
+      }).then(() => {
+        console.log("ไอเดียถูกบันทึกแล้ว");
+        // ส่งผู้ใช้ไปหน้า home.html
+        window.location.href = "home.html";
+      }).catch((error) => {
+        console.error("เกิดข้อผิดพลาด:", error);
+        alert("เกิดข้อผิดพลาดในการบันทึกไอเดีย");
+      });
     }
   </script>
-
 </body>
-</html> 
-
+</html>

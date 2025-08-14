@@ -160,6 +160,23 @@ body {
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
+/* สไตล์สำหรับปุ่ม GAME TIME ที่เพิ่มกลับมา */
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #a3a380;
+    color: #fff7e4;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #6e6e4f;
+}
+
 .circle-button-big {
     width: 80px;
     height: 80px;
@@ -286,12 +303,16 @@ body {
     <a href="contact.html">CONTACT</a>
 </div>
 
+<div class="utility-buttons">
+    <a href="https://wordwall.net/th/resource/95305486/เกมจบค-นำเสียจากแหล่งต่าง-ๆ" target="_blank" class="button-link" data-tour-step="5">GAME TIME</a>
+</div>
+
 <div class="content">
     <h1 style="color: #380c0d; font-size: 70px;">WELCOME!</h1>
     <h2 style="color: #514e2d;">ทุกคนมีวิธีบำบัดน้ำเสียที่ถูกต้องแล้วรึยัง?</h2>
     <p id="scoreDisplay"></p>
 
-    <a href="quiz.html" id="post-test-button" data-tour-step="5">POST-TEST</a>
+    <a href="quiz.html" id="post-test-button" data-tour-step="6">POST-TEST</a>
 
     <button class="circle-button-big" onclick="scrollToSection()">&#x2193;</button>
 </div>
@@ -392,10 +413,12 @@ document.addEventListener("DOMContentLoaded", () => {
             typingTimer = setTimeout(typeLine2, 60);
         } else {
             line2El.classList.remove("typing");
-            // เมื่อพิมพ์ข้อความเสร็จสิ้น ให้ Website Tour เริ่มทำงาน
-            introMessage.style.display = "none";
-            introBlurOverlay.style.display = "none";
-            startTour();
+            // หน่วงเวลา 1.5 วินาที ก่อนเริ่ม Tour
+            setTimeout(() => {
+                introMessage.style.display = "none";
+                introBlurOverlay.style.display = "none";
+                startTour();
+            }, 1500); // 1500 มิลลิวินาที = 1.5 วินาที
         }
     }
 
@@ -408,8 +431,6 @@ document.addEventListener("DOMContentLoaded", () => {
             startTour();
         }, 1500); // 1500 มิลลิวินาที = 1.5 วินาที
     });
-
-
 
     // ส่วนของ Website Tour
     const tourSteps = [
@@ -486,3 +507,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
+
+
+
+
+
+

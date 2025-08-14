@@ -33,41 +33,46 @@
       font-size: 16px;
     }
 
+
     h2 {
       color: #4f6815;
       margin-bottom: 20px;
     }
 
     #ideaList {
-  column-count: 3;            /* ปรับจำนวนคอลัมน์ที่ต้องการ */
-  column-gap: 20px;
-  padding: 20px;
-  max-width: 1000px;
-  box-sizing: border-box;
-  width: 100%;
-}
+      column-count: 3;            /* ปรับจำนวนคอลัมน์ที่ต้องการ */
+      column-gap: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      box-sizing: border-box;
+      width: 100%;
+    }
 
-.box {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 20px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
+    .box {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+    }
 
   </style>
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <style>
+    body { font-family: 'Leelawadee UI', sans-serif; padding:20px; background:#f9fbe7;}
+    .navbar a { margin-right:10px; text-decoration:none; color:#000; }
+    .box { background:#fff; margin:10px 0; padding:10px; border-radius:6px; box-shadow:0 0 5px #ccc; }
+  </style>
 </head>
 <body>
-
   <div class="navbar">
-    <a href="home.html">HOME</a>
+    <a href="home.html" class="home-highlight">HOME</a>
     <a href="cause.html">CAUSE</a>
     <a href="howto.html">HOW TO</a>
     <a href="place.html">PLACE</a>
@@ -75,13 +80,12 @@
     <a href="contact.html">CONTACT</a>
   </div>
 
-  <h2>💡IDEA </h2>
-  <h3>Please Back To Homepage</h3>
+  <h2>YOUR IDEA</h2>
+  
   
   <div id="ideaList"></div>
 
   <script>
-    // Firebase config ของคุณ
     const firebaseConfig = {
       apiKey: "AIzaSyDzY4p78Gk0HhCwNPBdPYC4I8arT6CUFgo",
       authDomain: "healer-wating.firebaseapp.com",
@@ -106,24 +110,9 @@
       });
     }
 
-    const params = new URLSearchParams(window.location.search);
-    const q0 = params.get('q0');
-
-    // บันทึกไอเดียไป Firestore ถ้ามี q0
-    if (q0 && q0.trim() !== "") {
-      db.collection("ideas").add({
-        text: q0.trim(),
-        createdAt: firebase.firestore.Timestamp.fromDate(new Date())
-      }).then(() => {
-        console.log("ไอเดียถูกบันทึกแล้ว");
-      }).catch((error) => {
-        console.error("เกิดข้อผิดพลาด:", error);
-      });
-    }
-
     const ideaListDiv = document.getElementById("ideaList");
 
-    // ดึงและแสดงไอเดียจาก Firestore
+    // ดึงและแสดงไอเดียทั้งหมดจาก Firestore
     db.collection("ideas").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
       ideaListDiv.innerHTML = "";
 
@@ -145,3 +134,4 @@
   </script>
 </body>
 </html>
+
